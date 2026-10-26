@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&amp;family=Instrument+Serif:ital@0;1&amp;display=swap">
+<script src="./image-slot.js"></script>
+<style>
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--ink,#16261F);font-family:Archivo,system-ui,sans-serif;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+*,*::before,*::after{box-sizing:border-box}
+a{color:inherit;text-decoration:none}
+a:hover{color:var(--acc,#CEBB7F)}
+::selection{background:var(--acc,#CEBB7F);color:var(--ink,#16261F)}
+input,textarea,button{font:inherit;color:inherit}
+::placeholder{color:currentColor;opacity:.42}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+</style>
+</helmet>
+<div style="background:var(--ink,#16261F);color:var(--paper,#F3EFE7);font-family:Archivo,system-ui,sans-serif;overflow-x:clip">
+
+<header style="position:sticky;top:0;z-index:50;background:color-mix(in srgb, var(--ink,#16261F) 90%, transparent);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.1);color:var(--paper,#F3EFE7)">
+  <div style="max-width:1360px;margin:0 auto;padding:14px clamp(20px,4vw,56px);display:flex;align-items:center;justify-content:space-between;gap:24px">
+    <a href="#top" aria-label="MGR — accueil" style="display:flex;align-items:center;gap:12px;color:inherit;flex:none">
+      <span aria-hidden="true" style="display:grid;grid-template-columns:repeat(4,7px);grid-auto-rows:7px;gap:2px;flex:none">
+        <span style="grid-column:span 2;background:currentColor"></span>
+        <span style="grid-column:span 2;background:currentColor"></span>
+        <span style="background:currentColor"></span>
+        <span style="grid-column:span 2;background:var(--acc,#CEBB7F)"></span>
+        <span style="background:currentColor"></span>
+        <span style="grid-column:span 2;background:currentColor"></span>
+        <span style="grid-column:span 2;background:currentColor"></span>
+      </span>
+      <span style="display:flex;flex-direction:column;gap:4px;line-height:1">
+        <span style="font-stretch:125%;font-weight:800;font-size:19px;letter-spacing:.06em">MGR</span>
+        <span style="font-size:9.5px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;opacity:.72">Maçonnerie · Rénovation</span>
+      </span>
+    </a>
+    <sc-if value="{{ navLinks }}" hint-placeholder-val="{{ true }}">
+      <nav style="display:flex;align-items:center;gap:28px;font-size:12px;font-weight:500;letter-spacing:.12em;text-transform:uppercase">
+        <a href="#savoir-faire" style="color:inherit;opacity:.82" style-hover="opacity:1;color:var(--acc,#CEBB7F)">Savoir-faire</a>
+        <a href="#prestations" style="color:inherit;opacity:.82" style-hover="opacity:1;color:var(--acc,#CEBB7F)">Prestations</a>
+        <a href="#engagements" style="color:inherit;opacity:.82" style-hover="opacity:1;color:var(--acc,#CEBB7F)">Engagements</a>
+        <a href="#methode" style="color:inherit;opacity:.82" style-hover="opacity:1;color:var(--acc,#CEBB7F)">Méthode</a>
+        <a href="#realisations" style="color:inherit;opacity:.82" style-hover="opacity:1;color:var(--acc,#CEBB7F)">Réalisations</a>
+        <a href="#faq" style="color:inherit;opacity:.82" style-hover="opacity:1;color:var(--acc,#CEBB7F)">FAQ</a>
+      </nav>
+    </sc-if>
+    <div style="display:flex;align-items:center;gap:10px">
+      <sc-if value="{{ navPhone }}" hint-placeholder-val="{{ true }}">
+        <a href="tel:+33620851647" style="display:flex;align-items:center;gap:10px;padding:11px 16px;border:1px solid rgba(255,255,255,.22);font-size:13.5px;font-weight:600;letter-spacing:.02em;color:inherit;white-space:nowrap;transition:border-color .25s,color .25s" style-hover="border-color:var(--acc,#CEBB7F);color:var(--acc,#CEBB7F)">
+          <span style="width:7px;height:7px;background:var(--acc,#CEBB7F);flex:none"></span>06&nbsp;20&nbsp;85&nbsp;16&nbsp;47
+        </a>
+        <a href="#devis" onClick="{{ goForm }}" style="display:flex;align-items:center;gap:10px;padding:12px 18px;background:var(--acc,#CEBB7F);color:var(--ink,#16261F);font-size:12px;font-weight:700;font-stretch:125%;letter-spacing:.12em;text-transform:uppercase;white-space:nowrap;transition:background .25s" style-hover="background:var(--paper,#F3EFE7);color:var(--ink,#16261F)">Devis gratuit <span aria-hidden="true">↗</span></a>
+      </sc-if>
+      <sc-if value="{{ menuBtn }}" hint-placeholder-val="{{ false }}">
+        <button onClick="{{ toggleMenu }}" aria-label="Menu" style="padding:11px 16px;border:1px solid rgba(255,255,255,.22);background:transparent;color:inherit;font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;cursor:pointer">{{ menuLabel }}</button>
+      </sc-if>
+    </div>
+  </div>
+</header>
+
+<sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+  <div style="position:fixed;left:0;right:0;top:69px;bottom:0;z-index:49;background:var(--ink,#16261F);color:var(--paper,#F3EFE7);padding:24px clamp(20px,4vw,56px) 40px;display:flex;flex-direction:column;overflow:auto">
+    <a href="#savoir-faire" onClick="{{ closeMenu }}" style="padding:18px 0;border-bottom:1px solid rgba(255,255,255,.12);font-stretch:125%;font-weight:500;font-size:28px;letter-spacing:-0.02em;color:inherit">Savoir-faire</a>
+    <a href="#prestations" onClick="{{ closeMenu }}" style="padding:18px 0;border-bottom:1px solid rgba(255,255,255,.12);font-stretch:125%;font-weight:500;font-size:28px;letter-spacing:-0.02em;color:inherit">Prestations</a>
+    <a href="#engagements" onClick="{{ closeMenu }}" style="padding:18px 0;border-bottom:1px solid rgba(255,255,255,.12);font-stretch:125%;font-weight:500;font-size:28px;letter-spacing:-0.02em;color:inherit">Engagements</a>
+    <a href="#methode" onClick="{{ closeMenu }}" style="padding:18px 0;border-bottom:1px solid rgba(255,255,255,.12);font-stretch:125%;font-weight:500;font-size:28px;letter-spacing:-0.02em;color:inherit">Méthode</a>
+    <a href="#realisations" onClick="{{ closeMenu }}" style="padding:18px 0;border-bottom:1px solid rgba(255,255,255,.12);font-stretch:125%;font-weight:500;font-size:28px;letter-spacing:-0.02em;color:inherit">Réalisations</a>
+    <a href="#avis" onClick="{{ closeMenu }}" style="padding:18px 0;border-bottom:1px solid rgba(255,255,255,.12);font-stretch:125%;font-weight:500;font-size:28px;letter-spacing:-0.02em;color:inherit">Avis</a>
+    <a href="#faq" onClick="{{ closeMenu }}" style="padding:18px 0;border-bottom:1px solid rgba(255,255,255,.12);font-stretch:125%;font-weight:500;font-size:28px;letter-spacing:-0.02em;color:inherit">FAQ</a>
+    <a href="#contact" onClick="{{ closeMenu }}" style="padding:18px 0;border-bottom:1px solid rgba(255,255,255,.12);font-stretch:125%;font-weight:500;font-size:28px;letter-spacing:-0.02em;color:inherit">Contact</a>
+    <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:32px">
+      <a href="tel:+33620851647" style="display:flex;align-items:center;padding:16px 20px;border:1px solid rgba(255,255,255,.25);font-weight:600;color:inherit">06&nbsp;20&nbsp;85&nbsp;16&nbsp;47</a>
+      <a href="#devis" onClick="{{ goForm }}" style="display:flex;align-items:center;gap:10px;padding:16px 20px;background:var(--acc,#CEBB7F);color:var(--ink,#16261F);font-size:12.5px;font-weight:700;font-stretch:125%;letter-spacing:.12em;text-transform:uppercase">Devis gratuit ↗</a>
+    </div>
+  </div>
+</sc-if>
+
+<section id="top" data-screen-label="Hero" style="position:relative;background:var(--ink,#16261F);color:var(--paper,#F3EFE7);overflow:hidden">
+  <sc-if value="{{ full }}" hint-placeholder-val="{{ false }}">
+    <div style="position:absolute;inset:0;color:var(--paper,#F3EFE7);background:repeating-linear-gradient(135deg,rgba(255,255,255,.045) 0 1px,transparent 1px 14px)">
+      <image-slot id="hero" src="https://images.unsplash.com/photo-1760546120487-ccb54df9838c?auto=format&amp;fit=crop&amp;w=2000&amp;q=80" credit="Photo by Smart Renovations on Unsplash" credit-href="https://unsplash.com/@smartrenovationscanada" shape="rect" placeholder="Photo plein cadre — une belle réalisation"></image-slot>
+    </div>
+    <div aria-hidden="true" style="position:absolute;inset:0;pointer-events:none;mask-image:linear-gradient(to top, transparent 0, #000 56px);background:linear-gradient(90deg, color-mix(in srgb, var(--ink,#16261F) 94%, transparent) 0%, color-mix(in srgb, var(--ink,#16261F) 62%, transparent) 50%, color-mix(in srgb, var(--ink,#16261F) 22%, transparent) 100%)"></div>
+  </sc-if>
+  <div aria-hidden="true" style="position:absolute;inset:0;pointer-events:none">
+    <div style="max-width:1360px;height:100%;margin:0 auto;padding:0 clamp(20px,4vw,56px)">
+      <div style="position:relative;height:100%">
+        <span data-a="drawy" data-d="0" style="position:absolute;top:0;bottom:0;left:0;width:1px;background:rgba(255,255,255,.07);transform-origin:top"></span>
+        <span data-a="drawy" data-d="90" style="position:absolute;top:0;bottom:0;left:25%;width:1px;background:rgba(255,255,255,.07);transform-origin:top"></span>
+        <span data-a="drawy" data-d="180" style="position:absolute;top:0;bottom:0;left:50%;width:1px;background:rgba(255,255,255,.07);transform-origin:top"></span>
+        <span data-a="drawy" data-d="270" style="position:absolute;top:0;bottom:0;left:75%;width:1px;background:rgba(255,255,255,.07);transform-origin:top"></span>
+        <span data-a="drawy" data-d="360" style="position:absolute;top:0;bottom:0;right:0;width:1px;background:rgba(255,255,255,.07);transform-origin:top"></span>
+      </div>
+    </div>
+  </div>
+
+  <div style="position:relative;max-width:1360px;margin:0 auto;padding:clamp(36px,4.5vw,64px) clamp(20px,4vw,56px) clamp(56px,6vw,96px);min-height:{{ heroMinH }};display:flex;flex-direction:column;justify-content:flex-end;pointer-events:none">
+    <sc-if value="{{ editorial }}" hint-placeholder-val="{{ true }}">
+      <div data-a="fade" data-d="0" style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px 32px;padding-bottom:22px;border-bottom:1px solid rgba(255,255,255,.12);font-size:11.5px;font-weight:600;font-stretch:125%;letter-spacing:.16em;text-transform:uppercase;pointer-events:auto">
+        <span style="color:var(--acc,#CEBB7F)">Maçonnerie générale &amp; rénovation</span>
+        <span style="opacity:.78">Viry-Châtillon — Essonne (91)</span>
+        <span style="display:flex;align-items:center;gap:10px"><span style="color:var(--acc,#CEBB7F);letter-spacing:.2em">★★★★★</span><span>5,0 sur Google</span></span>
+      </div>
+      <h1 style="margin:clamp(28px,4vw,56px) 0 0;font-stretch:125%;font-weight:500;font-size:clamp(44px,8.4vw,132px);line-height:.98;letter-spacing:-0.04em;pointer-events:auto">
+        <span style="display:block;overflow:hidden;padding-bottom:.06em"><span data-a="line" data-d="140" style="display:block">Du gros œuvre</span></span>
+        <span style="display:block;overflow:hidden;padding-bottom:.1em"><span data-a="line" data-d="280" style="display:block">au dernier <em style="font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;font-stretch:100%;font-size:1.12em;letter-spacing:-0.01em;color:var(--acc,#CEBB7F)">joint.</em></span></span>
+      </h1>
+    </sc-if>
+
+    <div style="display:flex;flex-wrap:wrap;gap:clamp(24px,3vw,40px);margin-top:clamp(32px,4vw,56px);align-items:{{ heroAlign }}">
+      <sc-if value="{{ editorial }}" hint-placeholder-val="{{ true }}">
+        <div data-a="fade" data-d="520" style="flex:1.35 1 520px;min-width:0;display:flex;flex-direction:column;gap:14px;pointer-events:auto">
+          <div aria-hidden="true" style="display:flex;align-items:center;gap:12px;color:var(--acc,#CEBB7F);font-size:10.5px;font-weight:600;font-stretch:125%;letter-spacing:.18em;text-transform:uppercase">
+            <span style="width:1px;height:14px;background:currentColor"></span>
+            <span style="flex:1;height:1px;background:currentColor;opacity:.55"></span>
+            <span style="white-space:nowrap">Visite &amp; métré offerts</span>
+            <span style="flex:1;height:1px;background:currentColor;opacity:.55"></span>
+            <span style="width:1px;height:14px;background:currentColor"></span>
+          </div>
+          <div style="position:relative;flex:1;min-height:clamp(320px,40vw,560px);color:var(--paper,#F3EFE7);background:repeating-linear-gradient(135deg,rgba(255,255,255,.05) 0 1px,transparent 1px 14px)">
+            <div style="position:absolute;inset:0">
+              <image-slot id="hero" src="https://images.unsplash.com/photo-1760546120487-ccb54df9838c?auto=format&amp;fit=crop&amp;w=2000&amp;q=80" credit="Photo by Smart Renovations on Unsplash" credit-href="https://unsplash.com/@smartrenovationscanada" shape="rect" placeholder="Photo de réalisation — salle de bain, carrelage, façade…"></image-slot>
+            </div>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ full }}" hint-placeholder-val="{{ false }}">
+        <div style="flex:1.4 1 520px;min-width:0;display:flex;flex-direction:column;gap:28px;pointer-events:auto">
+          <div data-a="fade" data-d="0" style="display:flex;align-items:center;gap:14px;font-size:11.5px;font-weight:600;font-stretch:125%;letter-spacing:.16em;text-transform:uppercase;color:var(--acc,#CEBB7F)">
+            <span>Maçonnerie générale &amp; rénovation</span><span style="width:36px;height:1px;background:currentColor"></span><span style="color:var(--paper,#F3EFE7)">Viry-Châtillon (91)</span>
+          </div>
+          <h1 style="margin:0;font-stretch:125%;font-weight:500;font-size:clamp(42px,6.2vw,98px);line-height:.98;letter-spacing:-0.04em">
+            <span style="display:block;overflow:hidden;padding-bottom:.06em"><span data-a="line" data-d="140" style="display:block">Du gros œuvre</span></span>
+            <span style="display:block;overflow:hidden;padding-bottom:.1em"><span data-a="line" data-d="280" style="display:block">au dernier <em style="font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;font-stretch:100%;font-size:1.12em;letter-spacing:-0.01em;color:var(--acc,#CEBB7F)">joint.</em></span></span>
+          </h1>
+          <p data-a="fade" data-d="480" style="margin:0;max-width:560px;font-size:clamp(17px,1.35vw,19px);line-height:1.6;text-wrap:pretty">Murs, ouvertures, dalles, carrelage, salles de bain&nbsp;: nous réalisons vos travaux de maçonnerie et de rénovation avec une exigence d’artisan. Un seul interlocuteur, un chantier propre, des finitions irréprochables.</p>
+          <div data-a="fade" data-d="600" style="display:flex;flex-wrap:wrap;gap:12px">
+            <a href="#prestations" style="display:inline-flex;align-items:center;gap:12px;padding:16px 22px;background:var(--acc,#CEBB7F);color:var(--ink,#16261F);font-size:12.5px;font-weight:700;font-stretch:125%;letter-spacing:.12em;text-transform:uppercase;transition:background .25s" style-hover="background:var(--paper,#F3EFE7);color:var(--ink,#16261F)">Nos prestations <span aria-hidden="true">↗</span></a>
+            <a href="tel:+33620851647" style="display:inline-flex;align-items:center;gap:12px;padding:16px 22px;border:1px solid rgba(255,255,255,.32);color:var(--paper,#F3EFE7);font-size:12.5px;font-weight:700;font-stretch:125%;letter-spacing:.12em;text-transform:uppercase;transition:border-color .25s,color .25s" style-hover="border-color:var(--acc,#CEBB7F);color:var(--acc,#CEBB7F)">06&nbsp;20&nbsp;85&nbsp;16&nbsp;47</a>
+          </div>
+          <div data-a="fade" data-d="700" style="display:flex;flex-wrap:wrap;gap:10px 28px;font-size:11.5px;font-weight:600;font-stretch:125%;letter-spacing:.14em;text-transform:uppercase">
+            <span><span style="color:var(--acc,#CEBB7F)">★★★★★</span>&nbsp; 5,0 Google</span>
+            <span>Visite &amp; devis offerts</span>
+            <span>Garantie décennale</span>
+          </div>
+        </div>
+      </sc-if>
+
+      <div style="flex:1 1 380px;min-width:0;display:flex;flex-direction:column;gap:28px;pointer-events:auto">
+        <sc-if value="{{ editorial }}" hint-placeholder-val="{{ true }}">
+          <p data-a="fade" data-d="620" style="margin:0;font-size:clamp(17px,1.35vw,19px);line-height:1.6;text-wrap:pretty">Murs, ouvertures, dalles, carrelage, salles de bain&nbsp;: nous réalisons vos travaux de maçonnerie et de rénovation avec une exigence d’artisan. <span style="opacity:.72">Un seul interlocuteur, un chantier propre, des finitions irréprochables.</span></p>
+        </sc-if>
+        <div id="devis" ref="{{ formRef }}" data-a="fade" data-d="740" style="background:var(--paper,#F3EFE7);color:var(--ink,#16261F);padding:clamp(24px,2.6vw,36px);scroll-margin-top:96px;box-shadow:0 30px 80px rgba(0,0,0,.28)">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;padding-bottom:18px;border-bottom:1px solid rgba(0,0,0,.12)">
+            <h2 style="margin:0;font-stretch:125%;font-weight:600;font-size:22px;letter-spacing:-0.01em">Devis gratuit</h2>
+            <span style="font-size:10.5px;font-weight:700;font-stretch:125%;letter-spacing:.16em;text-transform:uppercase;color:var(--accd,#76652F)">Sans engagement</span>
+          </div>
+          <sc-if value="{{ notSent }}" hint-placeholder-val="{{ true }}">
+            <form onSubmit="{{ submit }}" style="display:flex;flex-direction:column;gap:22px;margin:22px 0 0">
+              <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,170px),1fr));gap:20px 18px">
+                <label style="display:flex;flex-direction:column;gap:6px;min-width:0">
+                  <span style="font-size:10.5px;font-weight:600;font-stretch:125%;letter-spacing:.14em;text-transform:uppercase;opacity:.72">Nom complet</span>
+                  <input name="nom" required="required" placeholder="Jean Dupont" style="width:100%;border:0;border-bottom:1px solid rgba(0,0,0,.22);background:transparent;padding:8px 0 10px;font-size:16px;outline:none;border-radius:0;color:inherit" style-focus="border-bottom-color:var(--ink,#16261F)">
+                </label>
+                <label style="display:flex;flex-direction:column;gap:6px;min-width:0">
+                  <span style="font-size:10.5px;font-weight:600;font-stretch:125%;letter-spacing:.14em;text-transform:uppercase;opacity:.72">Téléphone</span>
+                  <input name="tel" type="tel" required="required" placeholder="06 00 00 00 00" style="width:100%;border:0;border-bottom:1px solid rgba(0,0,0,.22);background:transparent;padding:8px 0 10px;font-size:16px;outline:none;border-radius:0;color:inherit" style-focus="border-bottom-color:var(--ink,#16261F)">
+                </label>
+                <label style="display:flex;flex-direction:column;gap:6px;min-width:0">
+                  <span style="font-size:10.5px;font-weight:600;font-stretch:125%;letter-spacing:.14em;text-transform:uppercase;opacity:.72">E-mail</span>
+                  <input name="email" type="email" placeholder="vous@email.fr" style="width:100%;border:0;border-bottom:1px solid rgba(0,0,0,.22);background:transparent;padding:8px 0 10px;font-size:16px;outline:none;border-radius:0;color:inherit" style-focus="border-bottom-color:var(--ink,#16261F)">
+                </label>
+                <label style="display:flex;flex-direction:column;gap:6px;min-width:0">
+                  <span style="font-size:10.5px;font-weight:600;font-stretch:125%;letter-spacing:.14em;text-transform:uppercase;opacity:.72">Commune</span>
+                  <input name="ville" placeholder="91170 Viry-Châtillon" style="width:100%;border:0;border-bottom:1px solid rgba(0,0,0,.22);background:transparent;padding:8px 0 10px;font-size:16px;outline:none;border-radius:0;color:inherit" style-focus="border-bottom-color:var(--ink,#16261F)">
+                </label>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:10px">
+                <span style="font-size:10.5px;font-weight:600;font-stretch:125%;letter-spacing:.14em;text-transform:uppercase;opacity:.72">Type de travaux</span>
+                <div style="display:flex;flex-wrap:wrap;gap:8px">
+                  <button type="button" onClick="{{ c0.t }}" aria-pressed="{{ c0.pressed }}" style="padding:9px 14px;font-size:13.5px;border-width:1px;border-style:solid;border-color:{{ c0.bd }};background:{{ c0.bg }};color:{{ c0.fg }};cursor:pointer;transition:background .2s,color .2s,border-color .2s">Maçonnerie</button>
+                  <button type="button" onClick="{{ c1.t }}" aria-pressed="{{ c1.pressed }}" style="padding:9px 14px;font-size:13.5px;border-width:1px;border-style:solid;border-color:{{ c1.bd }};background:{{ c1.bg }};color:{{ c1.fg }};cursor:pointer;transition:background .2s,color .2s,border-color .2s">Carrelage</button>
+                  <button type="button" onClick="{{ c2.t }}" aria-pressed="{{ c2.pressed }}" style="padding:9px 14px;font-size:13.5px;border-width:1px;border-style:solid;border-color:{{ c2.bd }};background:{{ c2.bg }};color:{{ c2.fg }};cursor:pointer;transition:background .2s,color .2s,border-color .2s">Salle de bain</button>
+                  <button type="button" onClick="{{ c3.t }}" aria-pressed="{{ c3.pressed }}" style="padding:9px 14px;font-size:13.5px;border-width:1px;border-style:solid;border-color:{{ c3.bd }};background:{{ c3.bg }};color:{{ c3.fg }};cursor:pointer;transition:background .2s,color .2s,border-color .2s">Rénovation</button>
+                  <button type="button" onClick="{{ c4.t }}" aria-pressed="{{ c4.pressed }}" style="padding:9px 14px;font-size:13.5px;border-width:1px;border-style:solid;border-color:{{ c4.bd }};background:{{ c4.bg }};color:{{ c4.fg }};cursor:pointer;transition:background .2s,color .2s,border-color .2s">Autre</button>
+                </div>
+              </div>
+              <label style="display:flex;flex-direction:column;gap:6px">
+                <span style="font-size:10.5px;font-weight:600;font-stretch:125%;letter-spacing:.14em;text-transform:uppercase;opacity:.72">Votre projet</span>
+                <textarea name="message" rows="2" placeholder="Surface, délais souhaités, état actuel…" style="width:100%;border:0;border-bottom:1px solid rgba(0,0,0,.22);background:transparent;padding:8px 0;font-size:16px;outline:none;resize:vertical;border-radius:0;color:inherit;font-family:inherit" style-focus="border-bottom-color:var(--ink,#16261F)"></textarea>
+              </label>
+              <button type="submit" style="display:flex;justify-content:space-between;align-items:center;gap:16px;width:100%;padding:18px 22px;background:var(--ink,#16261F);color:var(--paper,#F3EFE7);border:0;font-size:12.5px;font-weight:700;font-stretch:125%;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:background .25s" style-hover="background:var(--accd,#76652F)">Envoyer ma demande <span aria-hidden="true" style="font-size:16px">↗</span></button>
+              <p style="margin:0;font-size:13px;line-height:1.5;opacity:.75">Ou appelez-nous directement au <a href="tel:+33620851647" style="color:inherit;font-weight:700;text-decoration:underline;text-underline-offset:3px">06&nbsp;20&nbsp;85&nbsp;16&nbsp;47</a></p>
+            </form>
+          </sc-if>
+          <sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}">
+            <div style="display:flex;flex-direction:column;gap:16px;padding:36px 0 8px">
+              <span aria-hidden="true" style="width:48px;height:48px;display:flex;align-items:center;justify-content:center;background:var(--acc,#CEBB7F);color:var(--ink,#16261F);font-size:22px;font-weight:700">✓</span>
+              <h3 style="margin:0;font-stretch:125%;font-weight:600;font-size:24px;letter-spacing:-0.02em;line-height:1.15">Merci, votre demande est bien partie.</h3>
+              <p style="margin:0;font-size:16px;line-height:1.6;opacity:.78">Nous vous recontactons rapidement pour convenir d’une visite sur place et établir votre devis.</p>
+              <button onClick="{{ again }}" style="align-self:flex-start;margin-top:8px;padding:12px 18px;border:1px solid rgba(0,0,0,.25);background:transparent;color:inherit;font-size:12px;font-weight:700;font-stretch:125%;letter-spacing:.12em;text-transform:uppercase;cursor:pointer">Nouvelle demande</button>
+            </div>
+          </sc-if>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div aria-hidden="true" style="background:var(--acc,#CEBB7F);color:var(--ink,#16261F);overflow:hidden">
+  <div data-marquee="1" style="display:flex;width:max-content;will-change:transform">
+    <div style="display:flex;align-items:center;gap:36px;padding:18px 18px;white-space:nowrap;font-stretch:125%;font-weight:600;font-size:15px;letter-spacing:.14em;text-transform:uppercase">
+      <span>Maçonnerie générale</span><span style="width:7px;height:7px;background:currentColor;transform:rotate(45deg);flex:none"></span>
+      <span>Carrelage &amp; faïence</span><span style="width:7px;height:7px;background:currentColor;transform:rotate(45deg);flex:none"></span>
+      <span>Salles de bain</span><span style="width:7px;height:7px;background:currentColor;transform:rotate(45deg);flex:none"></span>
+      <span>Rénovation intérieure</span><span style="width:7px;height:7px;background:currentColor;transform:rotate(45deg);flex:none"></span>
+      <span>Ouvertures &amp; cloisons</span><span style="width:7px;height:7px;background:currentColor;transform:rotate(45deg);flex:none"></span>
+      <span>Dalles &amp; chapes</span><span style="width:7px;height:7px;background:currentColor;transform:rotate(45deg);flex:none"></span>
+      <span>Terrasses &amp; murets</span><span style="width:7px;height:7px;background:currentColor;transform:rotate(45deg);flex:none"></span>
+    </div>
+    <div style="display:flex;align-items:center;gap:36px;padding:18px 18px;white-space:nowrap;font-stretch:125%;font-weight:600;font-size:15px;letter-spacing:.14em;text-transform:uppercase">
+      <span>Maçonnerie générale</span><span style="width:7px;height:7px;background:currentColor;transform:rotate(45deg);flex:none"></span>
+      <span>Carrelage &amp; faïence</span><span style="width:7px;height:7px;background:currentColor;transform:rotate(45deg);flex:none"></span>
+      <span>Salles de bain</span><span style="width:7px;height:7px;background:currentColor;transform:rotate(45deg);flex:none"></span>
+      <span>Rénovation intérieure</span><span style="width:7px;height:7px;background:currentColor;transform:rotate(45deg);flex:none"></span>
+      <span>Ouvertures &amp; cloisons</span><span style="width:7px;height:7px;background:currentColor;transform:rotate(45deg);flex:none"></span>
+      <span>Dalles &amp; chapes</span><span style="width:7px;height:7px;background:currentColor;transform:rotate(45deg);flex:none"></span>
+      <span>Terrasses &amp; murets</span><span style="width:7px;height:7px;background:currentColor;transform:rotate(45deg);flex:none"></span>
+    </div>
+  </div>
+</div>
+
+<section id="savoir-faire" data-screen-label="01 Savoir-faire" style="background:var(--paper,#F3EFE7);color:var(--ink,#16261F);padding:clamp(80px,10vw,150px) 0;scroll-margin-top:72px">
+  <div style="max-width:1360px;margin:0 auto;padding:0 clamp(20px,4vw,56px)">
+    <div style="display:flex;flex-wrap:wrap;gap:32px clamp(40px,6vw,96px);align-items:flex-end;justify-content:space-between">
+      <div style="flex:1 1 560px;min-width:0;display:flex;flex-direction:column;gap:28px">
+        <div style="display:flex;align-items:center;gap:14px;font-size:11.5px;font-weight:600;font-stretch:125%;letter-spacing:.16em;text-transform:uppercase;color:var(--accd,#76652F)"><span>01</span><span style="width:40px;height:1px;background:currentColor"></span><span>Savoir-faire</span></div>
+        <h2 style="margin:0;font-stretch:125%;font-weight:500;font-size:clamp(34px,4.6vw,68px);line-height:1.02;letter-spacing:-0.03em;text-wrap:balance">Des espaces transformés, <em style="font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;font-stretch:100%;font-size:1.1em;letter-spacing:-0.01em;color:var(--accd,#76652F)">bâtis pour durer.</em></h2>
+      </div>
+      <p style="flex:0 1 380px;margin:0;font-size:17px;line-height:1.6;opacity:.78;text-wrap:pretty">Maçonnerie, carrelage, salle de bain&nbsp;: le même niveau d’exigence, du support jusqu’à la dernière finition.</p>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;gap:clamp(32px,5vw,80px);margin-top:clamp(48px,6vw,88px);align-items:stretch">
+      <div style="flex:1.2 1 460px;min-width:0;position:relative;min-height:clamp(380px,46vw,640px);color:var(--ink,#16261F);background:var(--stone,#E7E1D5) repeating-linear-gradient(135deg,rgba(0,0,0,.045) 0 1px,transparent 1px 14px)">
+        <div style="position:absolute;inset:0"><image-slot id="about" src="https://images.unsplash.com/photo-1768839725085-829e6ac7ac26?auto=format&amp;fit=crop&amp;w=1400&amp;q=80" credit="Photo by Sasun Bughdaryan on Unsplash" credit-href="https://unsplash.com/@sasun1990" shape="rect" placeholder="Photo — l’équipe ou un chantier en cours"></image-slot></div>
+        <div style="position:absolute;right:0;bottom:0;pointer-events:none;background:var(--ink,#16261F);color:var(--paper,#F3EFE7);padding:18px 24px;display:flex;flex-direction:column;gap:6px">
+          <span style="font-size:10.5px;font-weight:600;font-stretch:125%;letter-spacing:.16em;text-transform:uppercase;color:var(--acc,#CEBB7F)">Basés à</span>
+          <span style="font-stretch:125%;font-weight:600;font-size:18px;letter-spacing:-0.01em">Viry-Châtillon (91)</span>
+        </div>
+      </div>
+      <div style="flex:1 1 400px;min-width:0;display:flex;flex-direction:column;justify-content:space-between;gap:44px">
+        <div style="display:flex;flex-direction:column;gap:22px;font-size:17px;line-height:1.7;text-wrap:pretty">
+          <p style="margin:0;font-size:clamp(19px,1.6vw,22px);line-height:1.55">Spécialisée en maçonnerie générale et en rénovation, notre entreprise accompagne les particuliers de Viry-Châtillon et de l’Essonne dans tous leurs projets&nbsp;: création ou ouverture de murs, dalles et chapes, pose de carrelage, rénovation complète de salles de bain.</p>
+          <p style="margin:0;opacity:.78">Chaque chantier est préparé avec méthode&nbsp;: relevé des mesures, choix des matériaux avec vous, protection de votre intérieur. Nous livrons des finitions que l’on peut regarder de près — et un espace propre, prêt à vivre.</p>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));gap:0 24px">
+          <div style="display:flex;flex-direction:column;gap:8px;padding:20px 0;border-top:1px solid rgba(0,0,0,.16)">
+            <span style="font-size:10.5px;font-weight:600;font-stretch:125%;letter-spacing:.16em;text-transform:uppercase;opacity:.7">Zone</span>
+            <span style="font-stretch:125%;font-weight:600;font-size:18px;letter-spacing:-0.01em">Essonne (91)</span>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:8px;padding:20px 0;border-top:1px solid rgba(0,0,0,.16)">
+            <span style="font-size:10.5px;font-weight:600;font-stretch:125%;letter-spacing:.16em;text-transform:uppercase;opacity:.7">Devis</span>
+            <span style="font-stretch:125%;font-weight:600;font-size:18px;letter-spacing:-0.01em">Gratuit, sur site</span>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:8px;padding:20px 0;border-top:1px solid rgba(0,0,0,.16)">
+            <span style="font-size:10.5px;font-weight:600;font-stretch:125%;letter-spacing:.16em;text-transform:uppercase;opacity:.7">Avis Google</span>
+            <span style="font-stretch:125%;font-weight:600;font-size:18px;letter-spacing:-0.01em">5,0&nbsp;/&nbsp;5</span>
+          </div>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:12px">
+          <a href="#prestations" style="display:inline-flex;align-items:center;gap:12px;padding:16px 22px;background:var(--ink,#16261F);color:var(--paper,#F3EFE7);font-size:12.5px;font-weight:700;font-stretch:125%;letter-spacing:.12em;text-transform:uppercase;transition:background .25s" style-hover="background:var(--accd,#76652F);color:var(--paper,#F3EFE7)">Nos prestations <span aria-hidden="true">↗</span></a>
+          <a href="tel:+33620851647" style="display:inline-flex;align-items:center;gap:12px;padding:16px 22px;border:1px solid rgba(0,0,0,.25);color:var(--ink,#16261F);font-size:12.5px;font-weight:700;font-stretch:125%;letter-spacing:.12em;text-transform:uppercase;transition:background .25s,color .25s" style-hover="background:var(--ink,#16261F);color:var(--paper,#F3EFE7)">Nous appeler <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="prestations" data-screen-label="02 Prestations" style="background:var(--ink,#16261F);color:var(--paper,#F3EFE7);padding:clamp(80px,10vw,150px) 0;scroll-margin-top:72px">
+  <div style="max-width:1360px;margin:0 auto;padding:0 clamp(20px,4vw,56px)">
+    <div style="display:flex;flex-wrap:wrap;gap:32px clamp(40px,6vw,96px);align-items:flex-end;justify-content:space-between">
+      <div style="flex:1 1 560px;min-width:0;display:flex;flex-direction:column;gap:28px">
+        <div style="display:flex;align-items:center;gap:14px;font-size:11.5px;font-weight:600;font-stretch:125%;letter-spacing:.16em;text-transform:uppercase;color:var(--acc,#CEBB7F)"><span>02</span><span style="width:40px;height:1px;background:currentColor"></span><span>Prestations</span></div>
+        <h2 style="margin:0;font-stretch:125%;font-weight:500;font-size:clamp(34px,4.6vw,68px);line-height:1.02;letter-spacing:-0.03em;text-wrap:balance">Quatre savoir-faire, <em style="font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;font-stretch:100%;font-size:1.1em;letter-spacing:-0.01em;color:var(--acc,#CEBB7F)">un seul interlocuteur.</em></h2>
+      </div>
+      <p style="flex:0 1 380px;margin:0;font-size:17px;line-height:1.6;opacity:.75;text-wrap:pretty">Du gros œuvre aux finitions, nous coordonnons l’ensemble de votre chantier — sans multiplier les intervenants.</p>
+    </div>
+
+    <div style="display:flex;flex-wrap:wrap;flex-direction:row-reverse;gap:clamp(32px,5vw,80px);margin-top:clamp(48px,6vw,80px);align-items:flex-start">
+      <div style="flex:1 1 400px;min-width:0;display:flex;flex-direction:column;gap:16px">
+        <div style="position:relative;height:clamp(340px,42vw,600px);color:var(--paper,#F3EFE7);background:repeating-linear-gradient(135deg,rgba(255,255,255,.05) 0 1px,transparent 1px 14px);border:1px solid rgba(255,255,255,.1)">
+          <div style="position:absolute;inset:0;opacity:{{ s0.img }};pointer-events:{{ s0.pe }};transition:opacity .5s"><image-slot id="svc-1" src="https://images.unsplash.com/photo-1704005445445-2747074be8ac?auto=format&amp;fit=crop&amp;w=1400&amp;q=80" credit="Photo by Gowtham AGM on Unsplash" credit-href="https://unsplash.com/@gowthamagm" shape="rect" placeholder="Photo — chantier de maçonnerie"></image-slot></div>
+          <div style="position:absolute;inset:0;opacity:{{ s1.img }};pointer-events:{{ s1.pe }};transition:opacity .5s"><image-slot id="svc-2" src="https://images.unsplash.com/photo-1731168273756-e02cae42265b?auto=format&amp;fit=crop&amp;w=1400&amp;q=80" credit="Photo by Renovations Certified on Unsplash" credit-href="https://unsplash.com/@renovationscertified" shape="rect" placeholder="Photo — pose de carrelage"></image-slot></div>
+          <div style="position:absolute;inset:0;opacity:{{ s2.img }};pointer-events:{{ s2.pe }};transition:opacity .5s"><image-slot id="svc-3" src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&amp;fit=crop&amp;w=1400&amp;q=80" credit="Photo by Lotus Design N Print on Unsplash" credit-href="https://unsplash.com/@lotusdnp" shape="rect" placeholder="Photo — salle de bain rénovée"></image-slot></div>
+          <div style="position:absolute;inset:0;opacity:{{ s3.img }};pointer-events:{{ s3.pe }};transition:opacity .5s"><image-slot id="svc-4" src="https://images.unsplash.com/photo-1634586648651-f1fb9ec10d90?auto=format&amp;fit=crop&amp;w=1400&amp;q=80" credit="Photo by Stefan Lehner on Unsplash" credit-href="https://unsplash.com/@st_lehner" shape="rect" placeholder="Photo — rénovation intérieure"></image-slot></div>
+        </div>
+        <div style="display:flex;justify-content:space-between;gap:16px;font-size:11.5px;font-weight:600;font-stretch:125%;letter-spacing:.16em;text-transform:uppercase"><span style="color:var(--acc,#CEBB7F)">{{ svcLabel }}</span><span style="opacity:.6">/ 04</span></div>
+      </div>
+
+      <div style="flex:1.2 1 520px;min-width:0;border-bottom:1px solid rgba(255,255,255,.14)">
+        <div onMouseEnter="{{ s0.on }}" onClick="{{ s0.on }}" style="border-top:1px solid rgba(255,255,255,.14);padding:clamp(20px,2.4vw,30px) 0;cursor:pointer">
+          <div style="display:flex;align-items:center;gap:clamp(16px,2vw,28px)">
+            <span style="font-family:'Instrument Serif',serif;font-style:italic;font-size:22px;color:var(--acc,#CEBB7F);width:30px;flex:none">01</span>
+            <h3 style="margin:0;flex:1;min-width:0;font-stretch:125%;font-weight:500;font-size:clamp(24px,3vw,42px);line-height:1.05;letter-spacing:-0.025em;opacity:{{ s0.op }};transition:opacity .35s">Maçonnerie générale</h3>
+            <span aria-hidden="true" style="width:14px;height:14px;flex:none;border:1px solid var(--acc,#CEBB7F);background:{{ s0.sq }};transition:background .3s"></span>
+          </div>
+          <div style="display:grid;grid-template-rows:{{ s0.rows }};transition:grid-template-rows .5s cubic-bezier(.2,.75,.1,1)">
+            <div style="overflow:hidden;min-height:0">
+              <div style="padding:18px 0 6px calc(30px + clamp(16px,2vw,28px));display:flex;flex-direction:column;gap:18px">
+                <p style="margin:0;max-width:520px;font-size:16.5px;line-height:1.6;opacity:.78;text-wrap:pretty">Murs, cloisons, ouvertures, dalles et chapes&nbsp;: la structure de votre projet, montée dans les règles de l’art.</p>
+                <div style="display:flex;flex-wrap:wrap;gap:8px;font-size:12.5px;letter-spacing:.02em">
+                  <span style="padding:7px 12px;border:1px solid rgba(255,255,255,.2)">Murs &amp; cloisons</span><span style="padding:7px 12px;border:1px solid rgba(255,255,255,.2)">Ouvertures</span><span style="padding:7px 12px;border:1px solid rgba(255,255,255,.2)">Dalles &amp; chapes</span><span style="padding:7px 12px;border:1px solid rgba(255,255,255,.2)">Enduits</span><span style="padding:7px 12px;border:1px solid rgba(255,255,255,.2)">Murets &amp; clôtures</span>
+                </div>
+                <button onClick="{{ s0.quote }}" style="align-self:flex-start;display:flex;align-items:center;gap:10px;padding:0 0 6px;background:none;border:0;border-bottom:1px solid currentColor;color:var(--acc,#CEBB7F);font-size:12px;font-weight:700;font-stretch:125%;letter-spacing:.12em;text-transform:uppercase;cursor:pointer">Demander un devis ↗</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div onMouseEnter="{{ s1.on }}" onClick="{{ s1.on }}" style="border-top:1px solid rgba(255,255,255,.14);padding:clamp(20px,2.4vw,30px) 0;cursor:pointer">
+          <div style="display:flex;align-items:center;gap:clamp(16px,2vw,28px)">
+            <span style="font-family:'Instrument Serif',serif;font-style:italic;font-size:22px;color:var(--acc,#CEBB7F);width:30px;flex:none">02</span>
+            <h3 style="margin:0;flex:1;min-width:0;font-stretch:125%;font-weight:500;font-size:clamp(24px,3vw,42px);line-height:1.05;letter-spacing:-0.025em;opacity:{{ s1.op }};transition:opacity .35s">Carrelage &amp; faïence</h3>
+            <span aria-hidden="true" style="width:14px;height:14px;flex:none;border:1px solid var(--acc,#CEBB7F);background:{{ s1.sq }};transition:background .3s"></span>
+          </div>
+          <div style="display:grid;grid-template-rows:{{ s1.rows }};transition:grid-template-rows .5s cubic-bezier(.2,.75,.1,1)">
+            <div style="overflow:hidden;min-height:0">
+              <div style="padding:18px 0 6px calc(30px + clamp(16px,2vw,28px));display:flex;flex-direction:column;gap:18px">
+                <p style="margin:0;max-width:520px;font-size:16.5px;line-height:1.6;opacity:.78;text-wrap:pretty">Sol et mur, grand format, faïence ou mosaïque&nbsp;: un calepinage étudié, des coupes nettes et des joints parfaitement réguliers.</p>
+                <div style="display:flex;flex-wrap:wrap;gap:8px;font-size:12.5px;letter-spacing:.02em">
+                  <span style="padding:7px 12px;border:1px solid rgba(255,255,255,.2)">Sol &amp; mur</span><span style="padding:7px 12px;border:1px solid rgba(255,255,255,.2)">Grand format</span><span style="padding:7px 12px;border:1px solid rgba(255,255,255,.2)">Faïence</span><span style="padding:7px 12px;border:1px solid rgba(255,255,255,.2)">Mosaïque</span><span style="padding:7px 12px;border:1px solid rgba(255,255,255,.2)">Plinthes</span>
+                </div>
+                <button onClick="{{ s1.quote }}" style="align-self:flex-start;display:flex;align-items:center;gap:10px;padding:0 0 6px;background:none;border:0;border-bottom:1px solid currentColor;color:var(--acc,#CEBB7F);font-size:12px;font-weight:700;font-stretch:125%;letter-spacing:.12em;text-transform:uppercase;cursor:pointer">Demander un devis ↗</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div onMouseEnter="{{ s2.on }}" onClick="{{ s2.on }}" style="border-top:1px solid rgba(255,255,255,.14);padding:clamp(20px,2.4vw,30px) 0;cursor:pointer">
+          <div style="display:flex;align-items:center;gap:clamp(16px,2vw,28px)">
+            <span style="font-family:'Instrument Serif',serif;font-style:italic;font-size:22px;color:var(--acc,#CEBB7F);width:30px;flex:none">03</span>
+            <h3 style="margin:0;flex:1;min-width:0;font-stretch:125%;font-weight:500;font-size:clamp(24px,3vw,42px);line-height:1.05;letter-spacing:-0.025em;opacity:{{ s2.op }};transition:opacity .35s">Salle de bain</h3>
+            <span aria-hidden="true" style="width:14px;height:14px;flex:none;border:1px solid var(--acc,#CEBB7F);background:{{ s2.sq }};transition:background .3s"></span>
+          </div>
+          <div style="display:grid;grid-template-rows:{{ s2.rows }};transition:grid-template-rows .5s cubic-bezier(.2,.75,.1,1)">
+            <div style="overflow:hidden;min-height:0">
+              <div style="padding:18px 0 6px calc(30px + clamp(16px,2vw,28px));display:flex;flex-direction:column;gap:18px">
+                <p style="margin:0;max-width:520px;font-size:16.5px;line-height:1.6;opacity:.78;text-wrap:pretty">Rénovation complète, de la dépose aux finitions&nbsp;: douche à l’italienne, étanchéité, carrelage et pose des équipements.</p>
+                <div style="display:flex;flex-wrap:wrap;gap:8px;font-size:12.5px;letter-spacing:.02em">
+                  <span style="padding:7px 12px;border:1px solid rgba(255,255,255,.2)">Douche à l’italienne</span><span style="padding:7px 12px;border:1px solid rgba(255,255,255,.2)">Étanchéité</span><span style="padding:7px 12px;border:1px solid rgba(255,255,255,.2)">Baignoire</span><span style="padding:7px 12px;border:1px solid rgba(255,255,255,.2)">Meuble vasque</span><span style="padding:7px 12px;border:1px solid rgba(255,255,255,.2)">Clé en main</span>
+                </div>
+                <button onClick="{{ s2.quote }}" style="align-self:flex-start;display:flex;align-items:center;gap:10px;padding:0 0 6px;background:none;border:0;border-bottom:1px solid currentColor;color:var(--acc,#CEBB7F);font-size:12px;font-weight:700;font-stretch:125%;letter-spacing:.12em;text-transform:uppercase;cursor:pointer">Demander un devis ↗</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div onMouseEnter="{{ s3.on }}" onClick="{{ s3.on }}" style="border-top:1px solid rgba(255,255,255,.14);padding:clamp(20px,2.4vw,30px) 0;cursor:pointer">
+          <div style="display:flex;align-items:center;gap:clamp(16px,2vw,28px)">
+            <span style="font-family:'Instrument Serif',serif;font-style:italic;font-size:22px;color:var(--acc,#CEBB7F);width:30px;flex:none">04</span>
+            <h3 style="margin:0;flex:1;min-width:0;font-stretch:125%;font-weight:500;font-size:clamp(24px,3vw,42px);line-height:1.05;letter-spacing:-0.025em;opacity:{{ s3.op }};transition:opacity .35s">Rénovation intérieure</h3>
+            <span aria-hidden="true" style="width:14px;height:14px;flex:none;border:1px solid var(--acc,#CEBB7F);background:{{ s3.sq }};transition:background .3s"></span>
+          </div>
+          <div style="display:grid;grid-template-rows:{{ s3.rows }};transition:grid-template-rows .5s cubic-bezier(.2,.75,.1,1)">
+            <div style="overflow:hidden;min-height:0">
+              <div style="padding:18px 0 6px calc(30px + clamp(16px,2vw,28px));display:flex;flex-direction:column;gap:18px">
+                <p style="margin:0;max-width:520px;font-size:16.5px;line-height:1.6;opacity:.78;text-wrap:pretty">Remise à neuf d’une pièce ou d’un logement entier&nbsp;: démolition, reprise des sols et des murs, préparation et finitions.</p>
+                <div style="display:flex;flex-wrap:wrap;gap:8px;font-size:12.5px;letter-spacing:.02em">
+                  <span style="padding:7px 12px;border:1px solid rgba(255,255,255,.2)">Démolition</span><span style="padding:7px 12px;border:1px solid rgba(255,255,255,.2)">Ragréage</span><span style="padding:7px 12px;border:1px solid rgba(255,255,255,.2)">Reprise de murs</span><span style="padding:7px 12px;border:1px solid rgba(255,255,255,.2)">Sols</span><span style="padding:7px 12px;border:1px solid rgba(255,255,255,.2)">Finitions</span>
+                </div>
+                <button onClick="{{ s3.quote }}" style="align-self:flex-start;display:flex;align-items:center;gap:10px;padding:0 0 6px;background:none;border:0;border-bottom:1px solid currentColor;color:var(--acc,#CEBB7F);font-size:12px;font-weight:700;font-stretch:125%;letter-spacing:.12em;text-transform:uppercase;cursor:pointer">Demander un devis ↗</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="engagements" data-screen-label="03 Engagements" style="background:var(--paper,#F3EFE7);color:var(--ink,#16261F);padding:clamp(80px,10vw,150px) 0 0;scroll-margin-top:72px">
+  <div style="max-width:1360px;margin:0 auto;padding:0 clamp(20px,4vw,56px)">
+    <div style="display:flex;flex-wrap:wrap;gap:clamp(40px,6vw,96px)">
+      <div style="flex:1 1 380px;min-width:0;display:flex;flex-direction:column;gap:28px">
+        <div style="display:flex;align-items:center;gap:14px;font-size:11.5px;font-weight:600;font-stretch:125%;letter-spacing:.16em;text-transform:uppercase;color:var(--accd,#76652F)"><span>03</span><span style="width:40px;height:1px;background:currentColor"></span><span>Engagements</span></div>
+        <h2 style="margin:0;font-stretch:125%;font-weight:500;font-size:clamp(34px,4.2vw,62px);line-height:1.02;letter-spacing:-0.03em;text-wrap:balance">Pourquoi nous <em style="font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;font-stretch:100%;font-size:1.1em;letter-spacing:-0.01em;color:var(--accd,#76652F)">confier</em> votre chantier.</h2>
+        <div style="position:relative;margin-top:20px;height:clamp(300px,34vw,500px);color:var(--ink,#16261F);background:var(--stone,#E7E1D5) repeating-linear-gradient(135deg,rgba(0,0,0,.045) 0 1px,transparent 1px 14px)">
+          <div style="position:absolute;inset:0"><image-slot id="why" src="https://images.unsplash.com/photo-1708919268837-2b4857323447?auto=format&amp;fit=crop&amp;w=1200&amp;q=80" credit="Photo by Ted Balmer on Unsplash" credit-href="https://unsplash.com/@midkiffaries" shape="rect" placeholder="Photo — détail de finition (joints, angle, niveau)"></image-slot></div>
+        </div>
+      </div>
+      <div style="flex:1.3 1 520px;min-width:0;align-self:flex-end;border-bottom:1px solid rgba(0,0,0,.14)">
+        <div style="display:flex;flex-wrap:wrap;gap:10px 32px;padding:26px 0;border-top:1px solid rgba(0,0,0,.14)">
+          <div style="flex:0 0 190px;display:flex;align-items:baseline;gap:14px"><span style="font-family:'Instrument Serif',serif;font-style:italic;font-size:22px;color:var(--accd,#76652F)">01</span><span style="font-size:12px;font-weight:600;font-stretch:125%;letter-spacing:.14em;text-transform:uppercase">Devis</span></div>
+          <p style="flex:1 1 260px;margin:0;font-size:clamp(17px,1.4vw,20px);line-height:1.5;text-wrap:pretty">Gratuit et détaillé, établi après une visite sur place. Sans engagement.</p>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:10px 32px;padding:26px 0;border-top:1px solid rgba(0,0,0,.14)">
+          <div style="flex:0 0 190px;display:flex;align-items:baseline;gap:14px"><span style="font-family:'Instrument Serif',serif;font-style:italic;font-size:22px;color:var(--accd,#76652F)">02</span><span style="font-size:12px;font-weight:600;font-stretch:125%;letter-spacing:.14em;text-transform:uppercase">Interlocuteur</span></div>
+          <p style="flex:1 1 260px;margin:0;font-size:clamp(17px,1.4vw,20px);line-height:1.5;text-wrap:pretty">Une seule personne suit votre projet, du premier rendez-vous à la réception.</p>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:10px 32px;padding:26px 0;border-top:1px solid rgba(0,0,0,.14)">
+          <div style="flex:0 0 190px;display:flex;align-items:baseline;gap:14px"><span style="font-family:'Instrument Serif',serif;font-style:italic;font-size:22px;color:var(--accd,#76652F)">03</span><span style="font-size:12px;font-weight:600;font-stretch:125%;letter-spacing:.14em;text-transform:uppercase">Assurances</span></div>
+          <p style="flex:1 1 260px;margin:0;font-size:clamp(17px,1.4vw,20px);line-height:1.5;text-wrap:pretty">Travaux couverts par la garantie décennale et la responsabilité civile professionnelle.</p>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:10px 32px;padding:26px 0;border-top:1px solid rgba(0,0,0,.14)">
+          <div style="flex:0 0 190px;display:flex;align-items:baseline;gap:14px"><span style="font-family:'Instrument Serif',serif;font-style:italic;font-size:22px;color:var(--accd,#76652F)">04</span><span style="font-size:12px;font-weight:600;font-stretch:125%;letter-spacing:.14em;text-transform:uppercase">Chantier</span></div>
+          <p style="flex:1 1 260px;margin:0;font-size:clamp(17px,1.4vw,20px);line-height:1.5;text-wrap:pretty">Accès protégés, gravats évacués, nettoyage complet en fin d’intervention.</p>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:10px 32px;padding:26px 0;border-top:1px solid rgba(0,0,0,.14)">
+          <div style="flex:0 0 190px;display:flex;align-items:baseline;gap:14px"><span style="font-family:'Instrument Serif',serif;font-style:italic;font-size:22px;color:var(--accd,#76652F)">05</span><span style="font-size:12px;font-weight:600;font-stretch:125%;letter-spacing:.14em;text-transform:uppercase">Finitions</span></div>
+          <p style="flex:1 1 260px;margin:0;font-size:clamp(17px,1.4vw,20px);line-height:1.5;text-wrap:pretty">Contrôlées à la règle et au niveau, jusqu’au dernier joint.</p>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:10px 32px;padding:26px 0;border-top:1px solid rgba(0,0,0,.14)">
+          <div style="flex:0 0 190px;display:flex;align-items:baseline;gap:14px"><span style="font-family:'Instrument Serif',serif;font-style:italic;font-size:22px;color:var(--accd,#76652F)">06</span><span style="font-size:12px;font-weight:600;font-stretch:125%;letter-spacing:.14em;text-transform:uppercase">Proximité</span></div>
+          <p style="flex:1 1 260px;margin:0;font-size:clamp(17px,1.4vw,20px);line-height:1.5;text-wrap:pretty">Installés à Viry-Châtillon, nous intervenons rapidement dans toute l’Essonne.</p>
+        </div>
+      </div>
+    </div>
+
+    <div style="padding:clamp(100px,12vw,180px) 0;display:flex;flex-direction:column;align-items:center;gap:36px;text-align:center">
+      <div aria-hidden="true" style="position:relative;width:148px;height:24px;border:1px solid var(--accd,#76652F);border-radius:12px">
+        <span style="position:absolute;left:calc(50% - 20px);top:calc(50% - 6px);width:40px;height:12px;border:1px solid var(--accd,#76652F);border-radius:6px"></span>
+        <span data-level="1" style="position:absolute;left:calc(50% - 6px);top:calc(50% - 3.5px);width:12px;height:7px;border-radius:4px;background:var(--accd,#76652F)"></span>
+      </div>
+      <blockquote style="margin:0;max-width:1100px;font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;font-size:clamp(36px,5.4vw,82px);line-height:1.04;letter-spacing:-0.015em;text-wrap:balance">«&nbsp;Ce que l’on ne voit pas fait durer ce que l’on voit.&nbsp;»</blockquote>
+      <p style="margin:0;max-width:560px;font-size:16.5px;line-height:1.65;opacity:.78;text-wrap:pretty">Supports, étanchéité, calepinage&nbsp;: nous soignons chaque étape invisible pour que le résultat traverse les années.</p>
+    </div>
+  </div>
+</section>
+
+<section id="methode" data-screen-label="04 Méthode" style="background:var(--ink,#16261F);color:var(--paper,#F3EFE7);padding:clamp(80px,10vw,150px) 0;scroll-margin-top:72px">
+  <div style="max-width:1360px;margin:0 auto;padding:0 clamp(20px,4vw,56px)">
+    <div style="display:flex;flex-wrap:wrap;gap:32px clamp(40px,6vw,96px);align-items:flex-end;justify-content:space-between">
+      <div style="flex:1 1 560px;min-width:0;display:flex;flex-direction:column;gap:28px">
+        <div style="display:flex;align-items:center;gap:14px;font-size:11.5px;font-weight:600;font-stretch:125%;letter-spacing:.16em;text-transform:uppercase;color:var(--acc,#CEBB7F)"><span>04</span><span style="width:40px;height:1px;background:currentColor"></span><span>Méthode</span></div>
+        <h2 style="margin:0;font-stretch:125%;font-weight:500;font-size:clamp(34px,4.6vw,68px);line-height:1.02;letter-spacing:-0.03em;text-wrap:balance">Six étapes, <em style="font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;font-stretch:100%;font-size:1.1em;letter-spacing:-0.01em;color:var(--acc,#CEBB7F)">zéro surprise.</em></h2>
+      </div>
+      <p style="flex:0 1 380px;margin:0;font-size:17px;line-height:1.6;opacity:.75;text-wrap:pretty">Un déroulé clair, de la première prise de contact jusqu’à la réception de votre chantier.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(max(min(100%,300px),30%),1fr));gap:1px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.14);margin-top:clamp(48px,6vw,80px)">
+      <div style="background:var(--ink,#16261F);padding:clamp(28px,3vw,44px);display:flex;flex-direction:column;gap:16px;min-height:290px;transition:background .3s" style-hover="background:color-mix(in srgb, var(--ink,#16261F) 90%, white)">
+        <span style="font-family:'Instrument Serif',serif;font-style:italic;font-size:64px;line-height:.9;color:var(--acc,#CEBB7F)">01</span>
+        <h3 style="margin:28px 0 0;font-stretch:125%;font-weight:600;font-size:21px;letter-spacing:-0.01em">Premier contact</h3>
+        <p style="margin:0;font-size:15.5px;line-height:1.6;opacity:.75;text-wrap:pretty">Par téléphone ou via le formulaire&nbsp;: nous échangeons sur votre projet, vos envies et vos contraintes.</p>
+      </div>
+      <div style="background:var(--ink,#16261F);padding:clamp(28px,3vw,44px);display:flex;flex-direction:column;gap:16px;min-height:290px;transition:background .3s" style-hover="background:color-mix(in srgb, var(--ink,#16261F) 90%, white)">
+        <span style="font-family:'Instrument Serif',serif;font-style:italic;font-size:64px;line-height:.9;color:var(--acc,#CEBB7F)">02</span>
+        <h3 style="margin:28px 0 0;font-stretch:125%;font-weight:600;font-size:21px;letter-spacing:-0.01em">Visite &amp; métré</h3>
+        <p style="margin:0;font-size:15.5px;line-height:1.6;opacity:.75;text-wrap:pretty">Nous venons gratuitement évaluer l’existant, prendre les mesures et vous conseiller sur les solutions.</p>
+      </div>
+      <div style="background:var(--ink,#16261F);padding:clamp(28px,3vw,44px);display:flex;flex-direction:column;gap:16px;min-height:290px;transition:background .3s" style-hover="background:color-mix(in srgb, var(--ink,#16261F) 90%, white)">
+        <span style="font-family:'Instrument Serif',serif;font-style:italic;font-size:64px;line-height:.9;color:var(--acc,#CEBB7F)">03</span>
+        <h3 style="margin:28px 0 0;font-stretch:125%;font-weight:600;font-size:21px;letter-spacing:-0.01em">Devis détaillé</h3>
+        <p style="margin:0;font-size:15.5px;line-height:1.6;opacity:.75;text-wrap:pretty">Un devis clair, poste par poste, sans mauvaise surprise. Nous l’ajustons avec vous si besoin.</p>
+      </div>
+      <div style="background:var(--ink,#16261F);padding:clamp(28px,3vw,44px);display:flex;flex-direction:column;gap:16px;min-height:290px;transition:background .3s" style-hover="background:color-mix(in srgb, var(--ink,#16261F) 90%, white)">
+        <span style="font-family:'Instrument Serif',serif;font-style:italic;font-size:64px;line-height:.9;color:var(--acc,#CEBB7F)">04</span>
+        <h3 style="margin:28px 0 0;font-stretch:125%;font-weight:600;font-size:21px;letter-spacing:-0.01em">Planification</h3>
+        <p style="margin:0;font-size:15.5px;line-height:1.6;opacity:.75;text-wrap:pretty">Choix des matériaux, commande des fournitures et calendrier d’intervention validé ensemble.</p>
+      </div>
+      <div style="background:var(--ink,#16261F);padding:clamp(28px,3vw,44px);display:flex;flex-direction:column;gap:16px;min-height:290px;transition:background .3s" style-hover="background:color-mix(in srgb, var(--ink,#16261F) 90%, white)">
+        <span style="font-family:'Instrument Serif',serif;font-style:italic;font-size:64px;line-height:.9;color:var(--acc,#CEBB7F)">05</span>
+        <h3 style="margin:28px 0 0;font-stretch:125%;font-weight:600;font-size:21px;letter-spacing:-0.01em">Réalisation</h3>
+        <p style="margin:0;font-size:15.5px;line-height:1.6;opacity:.75;text-wrap:pretty">Protection des lieux, travaux menés dans les règles de l’art et point régulier sur l’avancement.</p>
+      </div>
+      <div style="background:var(--ink,#16261F);padding:clamp(28px,3vw,44px);display:flex;flex-direction:column;gap:16px;min-height:290px;transition:background .3s" style-hover="background:color-mix(in srgb, var(--ink,#16261F) 90%, white)">
+        <span style="font-family:'Instrument Serif',serif;font-style:italic;font-size:64px;line-height:.9;color:var(--acc,#CEBB7F)">06</span>
+        <h3 style="margin:28px 0 0;font-stretch:125%;font-weight:600;font-size:21px;letter-spacing:-0.01em">Réception</h3>
+        <p style="margin:0;font-size:15.5px;line-height:1.6;opacity:.75;text-wrap:pretty">Contrôle des finitions avec vous, nettoyage complet&nbsp;: votre espace est prêt à vivre.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="realisations" data-screen-label="05 Réalisations" style="background:var(--paper,#F3EFE7);color:var(--ink,#16261F);padding:clamp(80px,10vw,150px) 0;scroll-margin-top:72px">
+  <div style="max-width:1360px;margin:0 auto;padding:0 clamp(20px,4vw,56px)">
+    <div style="display:flex;flex-wrap:wrap;gap:32px clamp(40px,6vw,96px);align-items:flex-end;justify-content:space-between">
+      <div style="flex:1 1 560px;min-width:0;display:flex;flex-direction:column;gap:28px">
+        <div style="display:flex;align-items:center;gap:14px;font-size:11.5px;font-weight:600;font-stretch:125%;letter-spacing:.16em;text-transform:uppercase;color:var(--accd,#76652F)"><span>05</span><span style="width:40px;height:1px;background:currentColor"></span><span>Réalisations</span></div>
+        <h2 style="margin:0;font-stretch:125%;font-weight:500;font-size:clamp(34px,4.6vw,68px);line-height:1.02;letter-spacing:-0.03em;text-wrap:balance">Jugez <em style="font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;font-stretch:100%;font-size:1.1em;letter-spacing:-0.01em;color:var(--accd,#76652F)">sur pièce.</em></h2>
+      </div>
+      <p style="flex:0 1 380px;margin:0;font-size:17px;line-height:1.6;opacity:.78;text-wrap:pretty">Faites glisser le curseur pour comparer l’avant et l’après, puis parcourez quelques-unes de nos réalisations.</p>
+    </div>
+
+    <div style="margin-top:clamp(48px,6vw,80px);background:var(--ink,#16261F);padding:8px;display:flex;flex-direction:column;gap:8px">
+      <div ref="{{ baRef }}" style="position:relative;height:clamp(320px,50vw,660px);overflow:hidden;user-select:none">
+        <div style="position:absolute;inset:0;color:var(--ink,#16261F);background:var(--stone,#E7E1D5) repeating-linear-gradient(135deg,rgba(0,0,0,.05) 0 1px,transparent 1px 14px)">
+          <image-slot id="ba-avant" src="https://images.unsplash.com/photo-1444419988131-046ed4e5ffd6?auto=format&amp;fit=crop&amp;w=2000&amp;q=80" credit="Photo by Nolan Issac on Unsplash" credit-href="https://unsplash.com/@nolanissac" shape="rect" placeholder="Photo AVANT travaux"></image-slot>
+        </div>
+        <div style="position:absolute;inset:0;color:var(--ink,#16261F);background:var(--paper,#F3EFE7) repeating-linear-gradient(135deg,rgba(0,0,0,.035) 0 1px,transparent 1px 14px);clip-path:{{ ba.clip }}">
+          <image-slot id="ba-apres" src="https://images.unsplash.com/photo-1554995207-c18c203602cb?auto=format&amp;fit=crop&amp;w=2000&amp;q=80" credit="Photo by Kara Eads on Unsplash" credit-href="https://unsplash.com/@karaeads" shape="rect" placeholder="Photo APRÈS travaux"></image-slot>
+        </div>
+        <span style="position:absolute;left:16px;top:16px;pointer-events:none;padding:8px 14px;background:var(--ink,#16261F);color:var(--paper,#F3EFE7);font-size:11px;font-weight:700;font-stretch:125%;letter-spacing:.16em;text-transform:uppercase">Avant</span>
+        <span style="position:absolute;right:16px;top:16px;pointer-events:none;padding:8px 14px;background:var(--acc,#CEBB7F);color:var(--ink,#16261F);font-size:11px;font-weight:700;font-stretch:125%;letter-spacing:.16em;text-transform:uppercase">Après</span>
+        <div style="position:absolute;top:0;bottom:0;left:{{ ba.left }};width:0">
+          <span style="position:absolute;top:0;bottom:0;left:-1px;width:2px;background:var(--ink,#16261F);pointer-events:none"></span>
+          <button aria-label="Comparer avant et après" onPointerDown="{{ ba.down }}" onPointerMove="{{ ba.move }}" onPointerUp="{{ ba.up }}" onPointerCancel="{{ ba.up }}" onKeyDown="{{ ba.key }}" style="position:absolute;top:50%;left:0;width:64px;height:64px;margin:-32px 0 0 -32px;border-radius:50%;background:var(--acc,#CEBB7F);color:var(--ink,#16261F);border:2px solid var(--ink,#16261F);cursor:ew-resize;touch-action:none;display:flex;align-items:center;justify-content:center;gap:8px;font-size:22px;font-weight:700;line-height:1;box-shadow:0 12px 32px rgba(0,0,0,.28)"><span aria-hidden="true">‹</span><span aria-hidden="true">›</span></button>
+        </div>
+      </div>
+      <div style="display:flex;justify-content:flex-end;padding:2px 6px 0;font-size:11px;letter-spacing:.02em;color:var(--paper,#F3EFE7);opacity:.72">Avant&nbsp;: photo <a href="https://unsplash.com/@nolanissac" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;margin:0 4px">Nolan Issac</a> · Après&nbsp;: photo <a href="https://unsplash.com/@karaeads" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;margin:0 4px">Kara Eads</a> sur <a href="https://unsplash.com" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;margin-left:4px">Unsplash</a></div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px">
+        <div style="flex:1.5 1 420px;min-width:0;position:relative;height:clamp(260px,30vw,440px);color:var(--ink,#16261F);background:var(--stone,#E7E1D5) repeating-linear-gradient(135deg,rgba(0,0,0,.045) 0 1px,transparent 1px 14px)">
+          <div style="position:absolute;inset:0"><image-slot id="real-1" src="https://images.unsplash.com/photo-1587527901949-ab0341697c1e?auto=format&amp;fit=crop&amp;w=1400&amp;q=80" credit="Photo by 99.films on Unsplash" credit-href="https://unsplash.com/@99films" shape="rect" placeholder="Salle de bain — douche à l’italienne"></image-slot></div>
+          <span style="position:absolute;top:12px;left:12px;pointer-events:none;padding:8px 12px;background:var(--ink,#16261F);color:var(--paper,#F3EFE7);font-size:10.5px;font-weight:700;font-stretch:125%;letter-spacing:.16em;text-transform:uppercase">Salle de bain</span>
+        </div>
+        <div style="flex:1 1 300px;min-width:0;position:relative;height:clamp(260px,30vw,440px);color:var(--ink,#16261F);background:var(--stone,#E7E1D5) repeating-linear-gradient(135deg,rgba(0,0,0,.045) 0 1px,transparent 1px 14px)">
+          <div style="position:absolute;inset:0"><image-slot id="real-2" src="https://images.unsplash.com/photo-1570881826833-ad7b98b7dffe?auto=format&amp;fit=crop&amp;w=1200&amp;q=80" credit="Photo by planimetrica on Unsplash" credit-href="https://unsplash.com/@planimetrica" shape="rect" placeholder="Carrelage grand format"></image-slot></div>
+          <span style="position:absolute;top:12px;left:12px;pointer-events:none;padding:8px 12px;background:var(--ink,#16261F);color:var(--paper,#F3EFE7);font-size:10.5px;font-weight:700;font-stretch:125%;letter-spacing:.16em;text-transform:uppercase">Carrelage</span>
+        </div>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px">
+        <div style="flex:1 1 260px;min-width:0;position:relative;height:clamp(220px,22vw,320px);color:var(--ink,#16261F);background:var(--stone,#E7E1D5) repeating-linear-gradient(135deg,rgba(0,0,0,.045) 0 1px,transparent 1px 14px)">
+          <div style="position:absolute;inset:0"><image-slot id="real-3" src="https://images.unsplash.com/photo-1701850009190-2859ba2aeea6?auto=format&amp;fit=crop&amp;w=1000&amp;q=80" credit="Photo by Solømen on Unsplash" credit-href="https://unsplash.com/@solomen" shape="rect" placeholder="Ouverture de mur"></image-slot></div>
+          <span style="position:absolute;top:12px;left:12px;pointer-events:none;padding:8px 12px;background:var(--ink,#16261F);color:var(--paper,#F3EFE7);font-size:10.5px;font-weight:700;font-stretch:125%;letter-spacing:.16em;text-transform:uppercase">Maçonnerie</span>
+        </div>
+        <div style="flex:1 1 260px;min-width:0;position:relative;height:clamp(220px,22vw,320px);color:var(--ink,#16261F);background:var(--stone,#E7E1D5) repeating-linear-gradient(135deg,rgba(0,0,0,.045) 0 1px,transparent 1px 14px)">
+          <div style="position:absolute;inset:0"><image-slot id="real-4" src="https://images.unsplash.com/photo-1781344334901-cfd593c38145?auto=format&amp;fit=crop&amp;w=1000&amp;q=80" credit="Photo by Ibrar Tariq on Unsplash" credit-href="https://unsplash.com/@stellar_shotsstudio" shape="rect" placeholder="Faïence &amp; mosaïque"></image-slot></div>
+          <span style="position:absolute;top:12px;left:12px;pointer-events:none;padding:8px 12px;background:var(--ink,#16261F);color:var(--paper,#F3EFE7);font-size:10.5px;font-weight:700;font-stretch:125%;letter-spacing:.16em;text-transform:uppercase">Faïence</span>
+        </div>
+        <div style="flex:1 1 260px;min-width:0;position:relative;height:clamp(220px,22vw,320px);color:var(--ink,#16261F);background:var(--stone,#E7E1D5) repeating-linear-gradient(135deg,rgba(0,0,0,.045) 0 1px,transparent 1px 14px)">
+          <div style="position:absolute;inset:0"><image-slot id="real-5" src="https://images.unsplash.com/photo-1632572129537-cd7fa334cfb2?auto=format&amp;fit=crop&amp;w=1000&amp;q=80" credit="Photo by Jonathan Greenaway on Unsplash" credit-href="https://unsplash.com/@jogaway" shape="rect" placeholder="Terrasse &amp; muret"></image-slot></div>
+          <span style="position:absolute;top:12px;left:12px;pointer-events:none;padding:8px 12px;background:var(--ink,#16261F);color:var(--paper,#F3EFE7);font-size:10.5px;font-weight:700;font-stretch:125%;letter-spacing:.16em;text-transform:uppercase">Extérieur</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="avis" data-screen-label="06 Avis" style="background:var(--stone,#E7E1D5);color:var(--ink,#16261F);padding:clamp(80px,10vw,150px) 0;scroll-margin-top:72px">
+  <div style="max-width:1360px;margin:0 auto;padding:0 clamp(20px,4vw,56px);display:flex;flex-wrap:wrap;gap:clamp(40px,6vw,96px);align-items:center">
+    <div style="flex:1 1 360px;min-width:0;display:flex;flex-direction:column;gap:20px">
+      <div style="display:flex;align-items:center;gap:14px;font-size:11.5px;font-weight:600;font-stretch:125%;letter-spacing:.16em;text-transform:uppercase;color:var(--accd,#76652F)"><span>06</span><span style="width:40px;height:1px;background:currentColor"></span><span>Avis clients</span></div>
+      <div style="font-stretch:125%;font-weight:600;font-size:clamp(120px,17vw,240px);line-height:.85;letter-spacing:-0.06em;margin-top:12px">5,0</div>
+      <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap">
+        <span style="font-size:24px;letter-spacing:.18em;color:var(--accd,#76652F)">★★★★★</span>
+        <span style="font-size:12px;font-weight:600;font-stretch:125%;letter-spacing:.14em;text-transform:uppercase">Note Google · 1&nbsp;avis</span>
+      </div>
+      <a href="https://www.google.com/maps/search/?api=1&amp;query=8%20Av.%20des%20Gentils%2C%2091170%20Viry-Ch%C3%A2tillon" target="_blank" rel="noopener" style="align-self:flex-start;display:inline-flex;align-items:center;gap:12px;margin-top:12px;padding:16px 22px;border:1px solid rgba(0,0,0,.25);color:var(--ink,#16261F);font-size:12.5px;font-weight:700;font-stretch:125%;letter-spacing:.12em;text-transform:uppercase;transition:background .25s,color .25s" style-hover="background:var(--ink,#16261F);color:var(--paper,#F3EFE7)">Voir sur Google <span aria-hidden="true">↗</span></a>
+    </div>
+    <div style="flex:1.4 1 520px;min-width:0;display:flex;flex-direction:column;gap:8px">
+      <figure style="margin:0;background:var(--paper,#F3EFE7);padding:clamp(32px,4vw,60px);display:flex;flex-direction:column;gap:28px">
+        <span aria-hidden="true" style="font-family:'Instrument Serif',serif;font-size:120px;line-height:.5;height:48px;color:var(--accd,#76652F)">“</span>
+        <blockquote style="margin:0;font-family:'Instrument Serif',serif;font-style:italic;font-size:clamp(26px,2.8vw,40px);line-height:1.2;letter-spacing:-0.01em;text-wrap:pretty">Travail soigné, chantier propre et délais tenus. Notre salle de bain est méconnaissable&nbsp;: je recommande sans hésiter.</blockquote>
+        <figcaption style="display:flex;align-items:center;gap:16px;padding-top:24px;border-top:1px solid rgba(0,0,0,.14)">
+          <span aria-hidden="true" style="width:44px;height:44px;border-radius:50%;background:var(--ink,#16261F);color:var(--paper,#F3EFE7);display:flex;align-items:center;justify-content:center;font-stretch:125%;font-weight:700;font-size:15px;flex:none">C</span>
+          <span style="display:flex;flex-direction:column;gap:4px;flex:1;min-width:0">
+            <span style="font-weight:600;font-size:16px">Client particulier</span>
+            <span style="font-size:13px;opacity:.72">Avis vérifié sur Google</span>
+          </span>
+          <span style="font-size:16px;letter-spacing:.14em;color:var(--accd,#76652F)">★★★★★</span>
+        </figcaption>
+      </figure>
+      <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px 24px;background:var(--ink,#16261F);color:var(--paper,#F3EFE7);padding:20px clamp(24px,3vw,36px)">
+        <span style="font-size:15.5px">Vous avez fait appel à nous&nbsp;? Votre avis compte.</span>
+        <a href="https://www.google.com/maps/search/?api=1&amp;query=8%20Av.%20des%20Gentils%2C%2091170%20Viry-Ch%C3%A2tillon" target="_blank" rel="noopener" style="font-size:12px;font-weight:700;font-stretch:125%;letter-spacing:.12em;text-transform:uppercase;color:var(--acc,#CEBB7F);border-bottom:1px solid currentColor;padding-bottom:4px" style-hover="color:var(--paper,#F3EFE7)">Laisser un avis ↗</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="faq" data-screen-label="07 FAQ" style="background:var(--paper,#F3EFE7);color:var(--ink,#16261F);padding:clamp(80px,10vw,150px) 0;scroll-margin-top:72px">
+  <div style="max-width:1360px;margin:0 auto;padding:0 clamp(20px,4vw,56px);display:flex;flex-wrap:wrap;gap:clamp(40px,6vw,96px)">
+    <div style="flex:1 1 340px;min-width:0;display:flex;flex-direction:column;gap:28px">
+      <div style="display:flex;align-items:center;gap:14px;font-size:11.5px;font-weight:600;font-stretch:125%;letter-spacing:.16em;text-transform:uppercase;color:var(--accd,#76652F)"><span>07</span><span style="width:40px;height:1px;background:currentColor"></span><span>Questions fréquentes</span></div>
+      <h2 style="margin:0;font-stretch:125%;font-weight:500;font-size:clamp(34px,4.2vw,62px);line-height:1.02;letter-spacing:-0.03em;text-wrap:balance">Vos questions, <em style="font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;font-stretch:100%;font-size:1.1em;letter-spacing:-0.01em;color:var(--accd,#76652F)">nos réponses.</em></h2>
+      <p style="margin:0;max-width:380px;font-size:17px;line-height:1.6;opacity:.78;text-wrap:pretty">Une question qui n’apparaît pas ici&nbsp;? Appelez-nous, nous vous répondons directement.</p>
+      <a href="tel:+33620851647" style="align-self:flex-start;display:inline-flex;align-items:center;gap:12px;padding:16px 22px;background:var(--ink,#16261F);color:var(--paper,#F3EFE7);font-size:12.5px;font-weight:700;font-stretch:125%;letter-spacing:.12em;text-transform:uppercase;transition:background .25s" style-hover="background:var(--accd,#76652F);color:var(--paper,#F3EFE7)">06&nbsp;20&nbsp;85&nbsp;16&nbsp;47 <span aria-hidden="true">↗</span></a>
+    </div>
+    <div style="flex:1.5 1 520px;min-width:0;border-bottom:1px solid rgba(0,0,0,.14)">
+      <div style="border-top:1px solid rgba(0,0,0,.14)">
+        <button onClick="{{ q0.t }}" aria-expanded="{{ q0.ex }}" style="width:100%;display:flex;justify-content:space-between;align-items:center;gap:24px;padding:26px 0;background:none;border:0;cursor:pointer;text-align:left;color:inherit">
+          <span style="font-stretch:112%;font-weight:500;font-size:clamp(18px,1.6vw,22px);letter-spacing:-0.01em;line-height:1.3">Le devis est-il vraiment gratuit&nbsp;?</span>
+          <span aria-hidden="true" style="position:relative;width:42px;height:42px;flex:none;border-radius:50%;border:1px solid rgba(0,0,0,.22);background:{{ q0.ibg }};color:{{ q0.ifg }};transition:background .3s,color .3s"><span style="position:absolute;left:calc(50% - 6px);top:calc(50% - .75px);width:12px;height:1.5px;background:currentColor"></span><span style="position:absolute;left:calc(50% - .75px);top:calc(50% - 6px);width:1.5px;height:12px;background:currentColor;transform:{{ q0.bar }};transition:transform .3s"></span></span>
+        </button>
+        <div style="display:grid;grid-template-rows:{{ q0.rows }};transition:grid-template-rows .45s cubic-bezier(.2,.75,.1,1)"><div style="overflow:hidden;min-height:0"><p style="margin:0;padding:0 64px 28px 0;max-width:680px;font-size:16.5px;line-height:1.65;opacity:.8;text-wrap:pretty">Oui. Nous nous déplaçons chez vous pour examiner l’existant, prendre les mesures et comprendre votre besoin. Vous recevez ensuite un devis détaillé, poste par poste, sans aucun engagement.</p></div></div>
+      </div>
+      <div style="border-top:1px solid rgba(0,0,0,.14)">
+        <button onClick="{{ q1.t }}" aria-expanded="{{ q1.ex }}" style="width:100%;display:flex;justify-content:space-between;align-items:center;gap:24px;padding:26px 0;background:none;border:0;cursor:pointer;text-align:left;color:inherit">
+          <span style="font-stretch:112%;font-weight:500;font-size:clamp(18px,1.6vw,22px);letter-spacing:-0.01em;line-height:1.3">Dans quelle zone intervenez-vous&nbsp;?</span>
+          <span aria-hidden="true" style="position:relative;width:42px;height:42px;flex:none;border-radius:50%;border:1px solid rgba(0,0,0,.22);background:{{ q1.ibg }};color:{{ q1.ifg }};transition:background .3s,color .3s"><span style="position:absolute;left:calc(50% - 6px);top:calc(50% - .75px);width:12px;height:1.5px;background:currentColor"></span><span style="position:absolute;left:calc(50% - .75px);top:calc(50% - 6px);width:1.5px;height:12px;background:currentColor;transform:{{ q1.bar }};transition:transform .3s"></span></span>
+        </button>
+        <div style="display:grid;grid-template-rows:{{ q1.rows }};transition:grid-template-rows .45s cubic-bezier(.2,.75,.1,1)"><div style="overflow:hidden;min-height:0"><p style="margin:0;padding:0 64px 28px 0;max-width:680px;font-size:16.5px;line-height:1.65;opacity:.8;text-wrap:pretty">Nous sommes installés à Viry-Châtillon et intervenons dans toute l’Essonne (91) ainsi que dans les communes voisines. Un doute sur votre secteur&nbsp;? Appelez-nous.</p></div></div>
+      </div>
+      <div style="border-top:1px solid rgba(0,0,0,.14)">
+        <button onClick="{{ q2.t }}" aria-expanded="{{ q2.ex }}" style="width:100%;display:flex;justify-content:space-between;align-items:center;gap:24px;padding:26px 0;background:none;border:0;cursor:pointer;text-align:left;color:inherit">
+          <span style="font-stretch:112%;font-weight:500;font-size:clamp(18px,1.6vw,22px);letter-spacing:-0.01em;line-height:1.3">Combien de temps dure la rénovation d’une salle de bain&nbsp;?</span>
+          <span aria-hidden="true" style="position:relative;width:42px;height:42px;flex:none;border-radius:50%;border:1px solid rgba(0,0,0,.22);background:{{ q2.ibg }};color:{{ q2.ifg }};transition:background .3s,color .3s"><span style="position:absolute;left:calc(50% - 6px);top:calc(50% - .75px);width:12px;height:1.5px;background:currentColor"></span><span style="position:absolute;left:calc(50% - .75px);top:calc(50% - 6px);width:1.5px;height:12px;background:currentColor;transform:{{ q2.bar }};transition:transform .3s"></span></span>
+        </button>
+        <div style="display:grid;grid-template-rows:{{ q2.rows }};transition:grid-template-rows .45s cubic-bezier(.2,.75,.1,1)"><div style="overflow:hidden;min-height:0"><p style="margin:0;padding:0 64px 28px 0;max-width:680px;font-size:16.5px;line-height:1.65;opacity:.8;text-wrap:pretty">Tout dépend de la surface et des travaux&nbsp;: une rénovation complète demande généralement entre une et trois semaines. Le planning précis est fixé avec vous dès la validation du devis.</p></div></div>
+      </div>
+      <div style="border-top:1px solid rgba(0,0,0,.14)">
+        <button onClick="{{ q3.t }}" aria-expanded="{{ q3.ex }}" style="width:100%;display:flex;justify-content:space-between;align-items:center;gap:24px;padding:26px 0;background:none;border:0;cursor:pointer;text-align:left;color:inherit">
+          <span style="font-stretch:112%;font-weight:500;font-size:clamp(18px,1.6vw,22px);letter-spacing:-0.01em;line-height:1.3">Êtes-vous assurés pour ces travaux&nbsp;?</span>
+          <span aria-hidden="true" style="position:relative;width:42px;height:42px;flex:none;border-radius:50%;border:1px solid rgba(0,0,0,.22);background:{{ q3.ibg }};color:{{ q3.ifg }};transition:background .3s,color .3s"><span style="position:absolute;left:calc(50% - 6px);top:calc(50% - .75px);width:12px;height:1.5px;background:currentColor"></span><span style="position:absolute;left:calc(50% - .75px);top:calc(50% - 6px);width:1.5px;height:12px;background:currentColor;transform:{{ q3.bar }};transition:transform .3s"></span></span>
+        </button>
+        <div style="display:grid;grid-template-rows:{{ q3.rows }};transition:grid-template-rows .45s cubic-bezier(.2,.75,.1,1)"><div style="overflow:hidden;min-height:0"><p style="margin:0;padding:0 64px 28px 0;max-width:680px;font-size:16.5px;line-height:1.65;opacity:.8;text-wrap:pretty">Oui. Nos travaux sont couverts par une garantie décennale et une assurance responsabilité civile professionnelle. Les attestations vous sont remises avec le devis.</p></div></div>
+      </div>
+      <div style="border-top:1px solid rgba(0,0,0,.14)">
+        <button onClick="{{ q4.t }}" aria-expanded="{{ q4.ex }}" style="width:100%;display:flex;justify-content:space-between;align-items:center;gap:24px;padding:26px 0;background:none;border:0;cursor:pointer;text-align:left;color:inherit">
+          <span style="font-stretch:112%;font-weight:500;font-size:clamp(18px,1.6vw,22px);letter-spacing:-0.01em;line-height:1.3">Pouvez-vous prendre en charge tout le chantier&nbsp;?</span>
+          <span aria-hidden="true" style="position:relative;width:42px;height:42px;flex:none;border-radius:50%;border:1px solid rgba(0,0,0,.22);background:{{ q4.ibg }};color:{{ q4.ifg }};transition:background .3s,color .3s"><span style="position:absolute;left:calc(50% - 6px);top:calc(50% - .75px);width:12px;height:1.5px;background:currentColor"></span><span style="position:absolute;left:calc(50% - .75px);top:calc(50% - 6px);width:1.5px;height:12px;background:currentColor;transform:{{ q4.bar }};transition:transform .3s"></span></span>
+        </button>
+        <div style="display:grid;grid-template-rows:{{ q4.rows }};transition:grid-template-rows .45s cubic-bezier(.2,.75,.1,1)"><div style="overflow:hidden;min-height:0"><p style="margin:0;padding:0 64px 28px 0;max-width:680px;font-size:16.5px;line-height:1.65;opacity:.8;text-wrap:pretty">Oui. De la démolition aux finitions, nous coordonnons l’ensemble des travaux&nbsp;: vous n’avez qu’un seul interlocuteur du début à la fin.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" data-screen-label="08 Contact" style="background:var(--ink,#16261F);color:var(--paper,#F3EFE7);padding:clamp(90px,11vw,160px) 0 clamp(60px,7vw,100px);scroll-margin-top:72px">
+  <div style="max-width:1360px;margin:0 auto;padding:0 clamp(20px,4vw,56px)">
+    <div style="display:flex;align-items:center;gap:14px;font-size:11.5px;font-weight:600;font-stretch:125%;letter-spacing:.16em;text-transform:uppercase;color:var(--acc,#CEBB7F)"><span>08</span><span style="width:40px;height:1px;background:currentColor"></span><span>Contact</span></div>
+    <h2 style="margin:32px 0 0;font-stretch:125%;font-weight:500;font-size:clamp(46px,8vw,128px);line-height:.98;letter-spacing:-0.04em;text-wrap:balance">Parlons de <em style="font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;font-stretch:100%;font-size:1.12em;letter-spacing:-0.01em;color:var(--acc,#CEBB7F)">votre projet.</em></h2>
+    <a href="tel:+33620851647" style="display:inline-block;margin-top:clamp(20px,3vw,36px);font-stretch:125%;font-weight:600;font-size:clamp(32px,6.4vw,100px);line-height:1;letter-spacing:-0.03em;color:var(--acc,#CEBB7F);white-space:nowrap;transition:color .25s" style-hover="color:var(--paper,#F3EFE7)">06&nbsp;20&nbsp;85&nbsp;16&nbsp;47</a>
+
+    <div style="display:flex;flex-wrap:wrap;gap:clamp(32px,5vw,72px);margin-top:clamp(56px,7vw,96px)">
+      <div style="flex:1 1 480px;min-width:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:0 40px;align-content:start">
+        <div style="padding:26px 0;border-top:1px solid rgba(255,255,255,.14);display:flex;flex-direction:column;gap:10px">
+          <span style="font-size:10.5px;font-weight:600;font-stretch:125%;letter-spacing:.16em;text-transform:uppercase;color:var(--acc,#CEBB7F)">Adresse</span>
+          <p style="margin:0;font-size:19px;line-height:1.45">8 Av. des Gentils<br>91170 Viry-Châtillon</p>
+          <a href="https://www.google.com/maps/dir/?api=1&amp;destination=8%20Av.%20des%20Gentils%2C%2091170%20Viry-Ch%C3%A2tillon" target="_blank" rel="noopener" style="align-self:flex-start;font-size:12px;font-weight:700;font-stretch:125%;letter-spacing:.12em;text-transform:uppercase;color:var(--acc,#CEBB7F);border-bottom:1px solid currentColor;padding-bottom:4px" style-hover="color:var(--paper,#F3EFE7)">Itinéraire ↗</a>
+        </div>
+        <div style="padding:26px 0;border-top:1px solid rgba(255,255,255,.14);display:flex;flex-direction:column;gap:10px">
+          <span style="font-size:10.5px;font-weight:600;font-stretch:125%;letter-spacing:.16em;text-transform:uppercase;color:var(--acc,#CEBB7F)">Horaires</span>
+          <p style="margin:0;font-size:19px;line-height:1.45">Ouvert jusqu’à 19&nbsp;h</p>
+          <p style="margin:0;font-size:14.5px;line-height:1.5;opacity:.72">Visites de chantier sur rendez-vous</p>
+        </div>
+        <div style="padding:26px 0;border-top:1px solid rgba(255,255,255,.14);display:flex;flex-direction:column;gap:10px">
+          <span style="font-size:10.5px;font-weight:600;font-stretch:125%;letter-spacing:.16em;text-transform:uppercase;color:var(--acc,#CEBB7F)">Zone d’intervention</span>
+          <p style="margin:0;font-size:19px;line-height:1.45">Viry-Châtillon et toute l’Essonne (91)</p>
+        </div>
+        <div style="padding:26px 0;border-top:1px solid rgba(255,255,255,.14);display:flex;flex-direction:column;gap:14px">
+          <span style="font-size:10.5px;font-weight:600;font-stretch:125%;letter-spacing:.16em;text-transform:uppercase;color:var(--acc,#CEBB7F)">Devis</span>
+          <p style="margin:0;font-size:19px;line-height:1.45">Gratuit, après visite sur place</p>
+          <a href="#devis" onClick="{{ goForm }}" style="align-self:flex-start;display:inline-flex;align-items:center;gap:12px;padding:14px 20px;background:var(--acc,#CEBB7F);color:var(--ink,#16261F);font-size:12px;font-weight:700;font-stretch:125%;letter-spacing:.12em;text-transform:uppercase;transition:background .25s" style-hover="background:var(--paper,#F3EFE7);color:var(--ink,#16261F)">Demander un devis ↗</a>
+        </div>
+      </div>
+      <div style="flex:1 1 420px;min-width:0;position:relative;min-height:400px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.14)">
+        <iframe title="Plan d’accès — 8 Av. des Gentils, Viry-Châtillon" src="https://maps.google.com/maps?q=8%20Avenue%20des%20Gentils%2C%2091170%20Viry-Ch%C3%A2tillon&amp;z=15&amp;output=embed" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;border:0;filter:grayscale(1) contrast(1.05) brightness(.94)"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer style="background:var(--ink,#16261F);color:var(--paper,#F3EFE7);border-top:1px solid rgba(255,255,255,.12);padding-top:clamp(56px,6vw,80px);overflow:hidden">
+  <div style="max-width:1360px;margin:0 auto;padding:0 clamp(20px,4vw,56px)">
+    <div style="display:flex;flex-wrap:wrap;gap:40px clamp(32px,5vw,72px);justify-content:space-between">
+      <div style="flex:1 1 280px;min-width:0;display:flex;flex-direction:column;gap:20px">
+        <div style="display:flex;align-items:center;gap:12px">
+          <span aria-hidden="true" style="display:grid;grid-template-columns:repeat(4,7px);grid-auto-rows:7px;gap:2px;flex:none">
+            <span style="grid-column:span 2;background:currentColor"></span>
+            <span style="grid-column:span 2;background:currentColor"></span>
+            <span style="background:currentColor"></span>
+            <span style="grid-column:span 2;background:var(--acc,#CEBB7F)"></span>
+            <span style="background:currentColor"></span>
+            <span style="grid-column:span 2;background:currentColor"></span>
+            <span style="grid-column:span 2;background:currentColor"></span>
+          </span>
+          <span style="display:flex;flex-direction:column;gap:4px;line-height:1">
+            <span style="font-stretch:125%;font-weight:800;font-size:19px;letter-spacing:.06em">MGR</span>
+            <span style="font-size:9.5px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;opacity:.72">Maçonnerie · Rénovation</span>
+          </span>
+        </div>
+        <p style="margin:0;max-width:320px;font-size:15px;line-height:1.6;opacity:.72">Maçonnerie générale &amp; rénovation à Viry-Châtillon&nbsp;: carrelage, salles de bain, gros œuvre et finitions.</p>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px;font-size:15px">
+        <span style="font-size:10.5px;font-weight:600;font-stretch:125%;letter-spacing:.16em;text-transform:uppercase;color:var(--acc,#CEBB7F);margin-bottom:6px">Navigation</span>
+        <a href="#savoir-faire" style="color:inherit;opacity:.8" style-hover="opacity:1;color:var(--acc,#CEBB7F)">Savoir-faire</a>
+        <a href="#prestations" style="color:inherit;opacity:.8" style-hover="opacity:1;color:var(--acc,#CEBB7F)">Prestations</a>
+        <a href="#methode" style="color:inherit;opacity:.8" style-hover="opacity:1;color:var(--acc,#CEBB7F)">Méthode</a>
+        <a href="#realisations" style="color:inherit;opacity:.8" style-hover="opacity:1;color:var(--acc,#CEBB7F)">Réalisations</a>
+        <a href="#faq" style="color:inherit;opacity:.8" style-hover="opacity:1;color:var(--acc,#CEBB7F)">FAQ</a>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px;font-size:15px">
+        <span style="font-size:10.5px;font-weight:600;font-stretch:125%;letter-spacing:.16em;text-transform:uppercase;color:var(--acc,#CEBB7F);margin-bottom:6px">Prestations</span>
+        <span style="opacity:.8">Maçonnerie générale</span>
+        <span style="opacity:.8">Carrelage &amp; faïence</span>
+        <span style="opacity:.8">Salle de bain</span>
+        <span style="opacity:.8">Rénovation intérieure</span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px;font-size:15px">
+        <span style="font-size:10.5px;font-weight:600;font-stretch:125%;letter-spacing:.16em;text-transform:uppercase;color:var(--acc,#CEBB7F);margin-bottom:6px">Contact</span>
+        <a href="tel:+33620851647" style="color:inherit;font-weight:600" style-hover="color:var(--acc,#CEBB7F)">06&nbsp;20&nbsp;85&nbsp;16&nbsp;47</a>
+        <span style="opacity:.8;line-height:1.5">8 Av. des Gentils<br>91170 Viry-Châtillon</span>
+        <span style="opacity:.8">Ouvert jusqu’à 19&nbsp;h</span>
+      </div>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px 24px;margin-top:clamp(48px,6vw,72px);padding:22px 0;border-top:1px solid rgba(255,255,255,.12);font-size:13px;opacity:.7">
+      <span>© 2026 MGR — Maçonnerie générale &amp; rénovation</span>
+      <span style="display:flex;gap:24px"><a href="#" style="color:inherit">Mentions légales</a><a href="#" style="color:inherit">Confidentialité</a></span>
+    </div>
+  </div>
+  <div aria-hidden="true" style="font-stretch:125%;font-weight:800;font-size:clamp(120px,27vw,420px);line-height:.76;letter-spacing:-0.05em;color:rgba(255,255,255,.06);text-align:center;white-space:nowrap;user-select:none;margin-bottom:-0.04em">MGR</div>
+  <sc-if value="{{ mobileBar }}" hint-placeholder-val="{{ false }}">
+    <div style="height:64px"></div>
+  </sc-if>
+</footer>
+
+<sc-if value="{{ mobileBar }}" hint-placeholder-val="{{ false }}">
+  <div style="position:fixed;left:0;right:0;bottom:0;z-index:60;display:grid;grid-template-columns:1fr 1fr;padding-bottom:env(safe-area-inset-bottom);background:var(--ink,#16261F);box-shadow:0 -10px 30px rgba(0,0,0,.25)">
+    <a href="tel:+33620851647" style="display:flex;align-items:center;justify-content:center;min-height:60px;background:var(--paper,#F3EFE7);color:var(--ink,#16261F);font-size:12.5px;font-weight:700;font-stretch:125%;letter-spacing:.12em;text-transform:uppercase">Appeler</a>
+    <a href="#devis" onClick="{{ goForm }}" style="display:flex;align-items:center;justify-content:center;min-height:60px;background:var(--acc,#CEBB7F);color:var(--ink,#16261F);font-size:12.5px;font-weight:700;font-stretch:125%;letter-spacing:.12em;text-transform:uppercase">Devis gratuit ↗</a>
+  </div>
+</sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;heroLayout&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Éditorial&quot;,&quot;Plein cadre&quot;],&quot;default&quot;:&quot;Éditorial&quot;,&quot;tsType&quot;:&quot;'Éditorial' | 'Plein cadre'&quot;},&quot;palette&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;options&quot;:[[&quot;#16261F&quot;,&quot;#F3EFE7&quot;,&quot;#E7E1D5&quot;,&quot;#CEBB7F&quot;,&quot;#76652F&quot;],[&quot;#1B1A18&quot;,&quot;#F2EEE8&quot;,&quot;#E6DFD5&quot;,&quot;#C9734E&quot;,&quot;#A1502F&quot;],[&quot;#18212B&quot;,&quot;#F1EFEA&quot;,&quot;#E3DFD7&quot;,&quot;#D4BA8D&quot;,&quot;#7A5F38&quot;]],&quot;default&quot;:[&quot;#16261F&quot;,&quot;#F3EFE7&quot;,&quot;#E7E1D5&quot;,&quot;#CEBB7F&quot;,&quot;#76652F&quot;],&quot;tsType&quot;:&quot;string[]&quot;},&quot;animations&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;}}">
+class Component extends DCLogic {
+  state = { vw: typeof window !== 'undefined' ? window.innerWidth : 1440, svc: 0, faq: 0, types: [], sent: false, menu: false, ba: 50 };
+  formRef = React.createRef();
+  baRef = React.createRef();
+
+  componentDidMount() {
+    this.applyPalette();
+    this._rs = () => this.setState({ vw: window.innerWidth });
+    window.addEventListener('resize', this._rs);
+    this._reduce = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+    if (this.motionOn()) this.intro();
+    this.marquee();
+    this.level();
+    this._slots = () => document.querySelectorAll('image-slot').forEach(s => {
+      if (!s.hasAttribute('data-filled') && s.hasAttribute('credit')) s.setAttribute('credit', s.getAttribute('credit'));
+    });
+    requestAnimationFrame(this._slots);
+    setTimeout(this._slots, 300);
+    window.addEventListener('load', this._slots);
+  }
+  componentDidUpdate(prev) {
+    if (prev.palette !== this.props.palette) this.applyPalette();
+    if (prev.animations !== this.props.animations) this.marquee();
+  }
+  componentWillUnmount() {
+    window.removeEventListener('resize', this._rs);
+    if (this._slots) window.removeEventListener('load', this._slots);
+    if (this._io) this._io.disconnect();
+    if (this._mq) this._mq.cancel();
+  }
+  motionOn() { return (this.props.animations ?? true) && !this._reduce; }
+
+  applyPalette() {
+    let p = this.props.palette;
+    if (typeof p === 'string') p = p.split(',').map(s => s.trim());
+    const d = ['#16261F', '#F3EFE7', '#E7E1D5', '#CEBB7F', '#76652F'];
+    const a = Array.isArray(p) && p.length >= 5 ? p : d;
+    const st = document.documentElement.style;
+    ['--ink', '--paper', '--stone', '--acc', '--accd'].forEach((k, i) => st.setProperty(k, a[i] || d[i]));
+  }
+  intro() {
+    const ease = 'cubic-bezier(.2,.75,.1,1)';
+    document.querySelectorAll('[data-a]').forEach(el => {
+      const t = el.getAttribute('data-a');
+      const d = +(el.getAttribute('data-d') || 0);
+      const kf = t === 'line' ? [{ transform: 'translateY(108%)' }, { transform: 'translateY(0)' }]
+        : t === 'drawy' ? [{ transform: 'scaleY(0)' }, { transform: 'scaleY(1)' }]
+        : [{ opacity: 0, transform: 'translateY(22px)' }, { opacity: 1, transform: 'translateY(0)' }];
+      el.animate(kf, { duration: t === 'drawy' ? 1600 : t === 'line' ? 1150 : 900, delay: d, easing: ease, fill: 'backwards' });
+    });
+  }
+  marquee() {
+    const el = document.querySelector('[data-marquee]');
+    if (!el) return;
+    if (!this._mq) this._mq = el.animate([{ transform: 'translateX(0)' }, { transform: 'translateX(-50%)' }], { duration: 60000, iterations: Infinity });
+    if (this.motionOn()) this._mq.play(); else this._mq.pause();
+  }
+  level() {
+    const el = document.querySelector('[data-level]');
+    if (!el || !('IntersectionObserver' in window) || !this.motionOn()) return;
+    this._io = new IntersectionObserver(es => {
+      if (es.some(e => e.isIntersecting)) {
+        el.animate([{ transform: 'translateX(-24px)' }, { transform: 'translateX(12px)' }, { transform: 'translateX(-6px)' }, { transform: 'translateX(2px)' }, { transform: 'translateX(0)' }], { duration: 1900, easing: 'ease-out' });
+        this._io.disconnect();
+      }
+    }, { threshold: 0.8 });
+    this._io.observe(el);
+  }
+
+  scrollForm() {
+    const el = this.formRef.current;
+    if (!el) return;
+    window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 92, behavior: this._reduce ? 'auto' : 'smooth' });
+  }
+  quote(i) {
+    this.setState(s => ({ sent: false, menu: false, types: s.types.includes(i) ? s.types : s.types.concat(i) }));
+    this.scrollForm();
+  }
+
+  baSet(x) {
+    const el = this.baRef.current;
+    if (!el) return;
+    const r = el.getBoundingClientRect();
+    this.setState({ ba: Math.max(2, Math.min(98, (x - r.left) / r.width * 100)) });
+  }
+  baDown = (e) => { this._drag = true; try { e.currentTarget.setPointerCapture(e.pointerId); } catch (_) {} e.preventDefault(); };
+  baMove = (e) => { if (this._drag) this.baSet(e.clientX); };
+  baUp = () => { this._drag = false; };
+  baKey = (e) => {
+    if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+    e.preventDefault();
+    const step = e.key === 'ArrowLeft' ? -5 : 5;
+    this.setState(s => ({ ba: Math.max(2, Math.min(98, s.ba + step)) }));
+  };
+
+  renderVals() {
+    const { vw, svc, faq, types, sent, menu, ba } = this.state;
+    const full = (this.props.heroLayout ?? 'Éditorial') === 'Plein cadre';
+    const ink = 'var(--ink,#16261F)', paper = 'var(--paper,#F3EFE7)', acc = 'var(--acc,#CEBB7F)';
+    const S = (i) => {
+      const a = svc === i;
+      return {
+        on: () => { if (this.state.svc !== i) this.setState({ svc: i }); },
+        op: a ? 1 : 0.42, rows: a ? '1fr' : '0fr', sq: a ? acc : 'transparent',
+        img: a ? 1 : 0, pe: a ? 'auto' : 'none',
+        quote: (e) => { if (e) e.stopPropagation(); this.quote(i); }
+      };
+    };
+    const Q = (i) => {
+      const o = faq === i;
+      return {
+        t: () => this.setState({ faq: o ? -1 : i }), ex: o ? 'true' : 'false',
+        rows: o ? '1fr' : '0fr', bar: o ? 'scaleY(0)' : 'scaleY(1)',
+        ibg: o ? ink : 'transparent', ifg: o ? paper : ink
+      };
+    };
+    const C = (i) => {
+      const o = types.includes(i);
+      return {
+        t: () => this.setState(s => ({ types: s.types.includes(i) ? s.types.filter(x => x !== i) : s.types.concat(i) })),
+        pressed: o ? 'true' : 'false', bg: o ? ink : 'transparent', fg: o ? paper : ink, bd: o ? ink : 'rgba(0,0,0,.22)'
+      };
+    };
+    const labels = ['Maçonnerie générale', 'Carrelage & faïence', 'Salle de bain', 'Rénovation intérieure'];
+    return {
+      full, editorial: !full,
+      heroMinH: full ? 'max(680px, calc(100vh - 73px))' : 'auto',
+      heroAlign: full ? 'flex-end' : 'stretch',
+      navLinks: vw >= 1180, navPhone: vw >= 760, menuBtn: vw < 1180, mobileBar: vw < 760,
+      menuOpen: menu && vw < 1180, menuLabel: menu ? 'Fermer' : 'Menu',
+      toggleMenu: () => this.setState(s => ({ menu: !s.menu })),
+      closeMenu: () => this.setState({ menu: false }),
+      goForm: (e) => { if (e && e.preventDefault) e.preventDefault(); this.setState({ menu: false }); this.scrollForm(); },
+      s0: S(0), s1: S(1), s2: S(2), s3: S(3),
+      svcLabel: '0' + (svc + 1) + ' — ' + labels[svc],
+      q0: Q(0), q1: Q(1), q2: Q(2), q3: Q(3), q4: Q(4),
+      c0: C(0), c1: C(1), c2: C(2), c3: C(3), c4: C(4),
+      sent, notSent: !sent,
+      submit: (e) => { e.preventDefault(); this.setState({ sent: true }); },
+      again: () => this.setState({ sent: false, types: [] }),
+      formRef: this.formRef, baRef: this.baRef,
+      ba: { clip: 'inset(0 0 0 ' + ba + '%)', left: ba + '%', down: this.baDown, move: this.baMove, up: this.baUp, key: this.baKey }
+    };
+  }
+}
+</script>
+</body>
+</html>
